@@ -15,7 +15,7 @@ M550 P"BR-DEFAULT"		; set the default name
 ; Network ---------------------------------------------------------------------
 M552 P10.66.0.10 S1		; set IP Address
 M553 P255.255.255.0		; set Netmask
-M554 P10.66.0.20		; set Gateway
+M554 P10.66.0.2		    ; set Gateway ip adress of panel pc
 
 M586 P0 S1				; Enable HTTP
 M586 P1 S1				; enable FTP
