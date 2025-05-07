@@ -49,7 +49,6 @@ M98 P"/macros/assert/board_present.g" D10 Y"X axis motor board is required for E
 M98 P"/macros/assert/board_present.g" D20 Y"Y axis motor board is  required for EMERGENCY" F{var.CURRENT_FILE} E12172
 M98 P"/macros/assert/board_present.g" D30 Y"Z axis left motor board is required for EMERGENCY" F{var.CURRENT_FILE} E12173
 M98 P"/macros/assert/board_present.g" D31 Y"Z axis right motor board is required for EMERGENCY" F{var.CURRENT_FILE} E12174
-M98 P"/macros/assert/board_present.g" D70 Y"Stage board is required for EMERGENCY" F{var.CURRENT_FILE} E12175
 
 ; Setting the emergency pins in the expansion boards.
 var idx = 0
