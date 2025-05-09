@@ -9,7 +9,7 @@ M118 S{"[CONFIG] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[
 M98 P"/macros/assert/abort_if.g" R{exists(global.MODULE_EMERGENCY)}  Y{"A previous EMERGENCY configuration exists"} F{var.CURRENT_FILE} E12170
 
 ; DEFINITIONS --------------------------------------------------------------------------------
-var EMERGENCY_DOOR_ALL_INPUTS 	 = {"10.emerg", "20.emerg", "30.emerg", "31.emerg", "0.io4.in", "70.emerg"}		; List of boards with emergency input
+var EMERGENCY_DOOR_ALL_INPUTS 	 = {"10.emerg", "20.emerg", "30.emerg", "31.emerg", "0.io4.in"}		; List of boards with emergency input
 var EMERGENCY_DOOR_INPUT_TRIGGER = "20.emerg" 				; This pin will trigger the event.
 
 M98 P"/macros/get_id/trigger.g"
