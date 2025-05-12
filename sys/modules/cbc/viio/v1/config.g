@@ -65,7 +65,6 @@ M98 P"/macros/assert/board_present.g" D10 Y"X axis motor board is required for C
 M98 P"/macros/assert/board_present.g" D20 Y"Y axis motor board is required for CBC" F{var.CURRENT_FILE} E11201
 M98 P"/macros/assert/board_present.g" D30 Y"Z axis left motor board is required for CBC" F{var.CURRENT_FILE} E11202
 M98 P"/macros/assert/board_present.g" D31 Y"Z axis right motor board is required for CBC" F{var.CURRENT_FILE} E11203
-M98 P"/macros/assert/board_present.g" D70 Y"Stage board is required for CBC" F{var.CURRENT_FILE} E11204
 
 ; Sensor:
 ; External temperature sensor

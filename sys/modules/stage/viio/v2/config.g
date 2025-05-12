@@ -9,7 +9,7 @@ M118 S{"[CONFIG] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[
 ; Checking global variables and input parameters ------------------------------
 ; Checking global variables
 M98 P"/macros/assert/abort_if.g" R{exists(global.MODULE_STAGE)}  	Y{"A previous STAGE configuration exists"} F{var.CURRENT_FILE} E16110
-M98 P"/macros/assert/board_present.g" D70 Y"Board 70 is required for STAGE" F{var.CURRENT_FILE} E16111
+;M98 P"/macros/assert/board_present.g" D70 Y"Board 70 is required for STAGE" F{var.CURRENT_FILE} E16111
 ; DEFINITIONS --------------------------------------------------------------------------------
 var LIFTING_MOTOR_T0 = 70.0				 			; Lifiting motor of Tool 0
 var LIFTING_MOTOR_T1 = 70.1				 			; Lifiting motor of Tool 1

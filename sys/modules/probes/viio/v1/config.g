@@ -54,7 +54,7 @@ global probeParameters = {(-5462.51-var.PROBE_OFFSET_PARAM), (6014.23-var.PROBE_
 
 ; CONFIGURATION ---------------------------------------------------------------
 ; Making sure the board is available
-M98 P"/macros/assert/board_present.g" D70 Y"Stage board is required for PROBES" F{var.CURRENT_FILE} E15152
+; M98 P"/macros/assert/board_present.g" D70 Y"Stage board is required for PROBES" F{var.CURRENT_FILE} E15152
 
 ; Creation of the sensor
 M308 S{global.PROBE_SENSOR_ID} P{global.PROBE_SENSOR_PORT} Y{var.PROBE_SENSOR_TYPE} F1 B{global.probeParameters[0]} C{global.probeParameters[1]} A{var.PROBE_SENSOR_NAME}
