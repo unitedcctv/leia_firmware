@@ -23,7 +23,7 @@ if network.hostname == "emulator"
 	M99 ; Proper exit
 
 ; Board detection -------------------------------------------------------------
-var BOARD_ADDRESS = {81 + param.T}
+var BOARD_ADDRESS = {83 + param.T}
 M98 P"/macros/boards/get_index_in_om.g" A{var.BOARD_ADDRESS}
 if( global.boardIndexInOM == null )
 	M118 S{"[TOOL] No board connected to T"^param.T}

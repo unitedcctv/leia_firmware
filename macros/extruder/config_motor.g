@@ -36,8 +36,8 @@ M98 P"/macros/assert/abort_if_null.g" R{param.A}  	  			Y{"Input parameter A is 
 M98 P"/macros/assert/abort_if.g" R{!exists(param.C)}  			Y{"Missing required input parameter C"} F{var.CURRENT_FILE} E57042
 M98 P"/macros/assert/abort_if_null.g" R{param.C}  	  			Y{"Input parameter C is null"} 			F{var.CURRENT_FILE} E57043
 ; Checking the driver
-var INVALID_DRIVER = (param.D != 0.5 && param.D != 0.6 && param.D != 81.0 && param.D != 82.0)
-M98 P"/macros/assert/abort_if.g" R{var.INVALID_DRIVER}  		Y{"Only drivers 0.5, 0.6, 81.0 or 82.0 are supported"} F{var.CURRENT_FILE} E57045
+var INVALID_DRIVER = (param.D != 0.5 && param.D != 0.6 && param.D != 83.0 && param.D != 82.0)
+M98 P"/macros/assert/abort_if.g" R{var.INVALID_DRIVER}  		Y{"Only drivers 0.5, 0.6, 83.0 or 82.0 are supported"} F{var.CURRENT_FILE} E57045
 
 
 ; Default values of the return parameter
@@ -54,7 +54,7 @@ while (iterations < #move.extruders)
 	if(move.extruders[iterations] != null && move.extruders[iterations].driver != null)
 		M98 P"/macros/assert/abort_if.g" R{(move.extruders[iterations].driver == var.DRIVER_NAME)} Y{"Driver already used"} F{var.CURRENT_FILE} E57047
 
-if( param.D == 81.0 || param.D == 82.0)
+if( param.D == 83.0 || param.D == 82.0)
 	M569 P{param.D} D3 H50 V50 ; We need stealthChop to enable the sensor
 
 if( var.EXTRUDERS_CONFIGURED == 0 )
@@ -89,11 +89,11 @@ else
 	elif( move.extruders[0].driver == "6" && param.D == 0.5 )
 		M584 E0.6:0.5					; Mapping the extruder 1 to param.D
 		M98 P"/macros/assert/result.g" R{result} Y"Unable to map the motor driver to T1" F{var.CURRENT_FILE} E57056
-	elif( move.extruders[0].driver == "81.0" && param.D == 82.0 )
-		M584 E81.0:82.0					; Mapping the extruder 1 to param.D
+	elif( move.extruders[0].driver == "83.0" && param.D == 82.0 )
+		M584 E83.0:82.0					; Mapping the extruder 1 to param.D
 		M98 P"/macros/assert/result.g" R{result} Y"Unable to map the motor driver to T1" F{var.CURRENT_FILE} E57057
-	elif( move.extruders[0].driver == "82.0" && param.D == 81.0 )
-		M584 E82.0:81.0					; Mapping the extruder 1 to param.D
+	elif( move.extruders[0].driver == "82.0" && param.D == 83.0 )
+		M584 E82.0:83.0					; Mapping the extruder 1 to param.D
 		M98 P"/macros/assert/result.g" R{result} Y"Unable to map the motor driver to T1" F{var.CURRENT_FILE} E57058
 	else
 		M98 P"/macros/assert/abort.g" Y{"Unknown first exturder driver or not supported"}  F{var.CURRENT_FILE} E57059

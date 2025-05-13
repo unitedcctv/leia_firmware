@@ -21,14 +21,9 @@ elif(var.CAN_ADDRESS == "30")
 	set var.CAN_ADDRESS = "left Z motor"
 elif(var.CAN_ADDRESS == "31")
 	set var.CAN_ADDRESS = "Right Z motor"
-elif(var.CAN_ADDRESS == "81")
+elif(var.CAN_ADDRESS == "83")
 	set var.CAN_ADDRESS = "T0"
-elif(var.CAN_ADDRESS == "82")
-	set var.CAN_ADDRESS = "T1"
-elif(var.CAN_ADDRESS == "40")
-	set var.CAN_ADDRESS = "Infinity box 0 motor"
-elif(var.CAN_ADDRESS == "41")
-	set var.CAN_ADDRESS = "Infinity box 1 motor"
+
 M400
 
 var msg = {"%s board: %s"}
