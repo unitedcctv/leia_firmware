@@ -302,8 +302,6 @@ M669 S5
 
 ; Emergency stop signal -------------------------------------------------------
 ; Create the input
-M950 J{var.EMERGENCY_INPUT_ID} C{"!"^global.PROBE_SENSOR_PORT} T{var.ADC_EMERGENCY_TRIGGERING_POINT}
-M98 P"/macros/assert/result.g" R{result} Y"Unable to create the analog input to trigger the emergency" F{var.CURRENT_FILE} E10594
 
 ; Create the trigger event
 M581 P{var.EMERGENCY_INPUT_ID} T{var.EMERGENCY_TRIGGER_ID} S1	;Configure the emergency trigger event

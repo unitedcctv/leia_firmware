@@ -12,7 +12,7 @@ var doorClosed 			= {(exists(global.emergencyDoorIsTriggered) && (!global.emerge
 var cbcOn 				= {fans[global.CBC_HEATER].requestedValue > 0.0}
 var cbcFansOn 			= {fans[global.FAN_EXHAUST_A].requestedValue > 0.0 || fans[global.FAN_EXHAUST_B].requestedValue > 0.0}
 var	MAX_WAIT_TIME		= global.cbcIdleWaitTime
-var HEATER_ON			= global.cbcTargetTemperature > 0.0
+var HEATER_ON			= false
 var CBC_HEATER_PERIOD 	= 5	; [s] arbitrary value to delay execution of heater control to every n-th second
 var cbcSBLastTemp		= 0
 

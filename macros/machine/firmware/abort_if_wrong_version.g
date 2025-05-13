@@ -26,8 +26,6 @@ while iterations < #boards
 			set var.BOARD_NAME = "left Z motor"
 		elif(var.CAN_ADDRESS == "31")
 			set var.BOARD_NAME = "Right Z motor"
-		elif(var.CAN_ADDRESS == "70")
-			set var.BOARD_NAME = "Stage"
 		elif(var.CAN_ADDRESS == "81")
 			set var.BOARD_NAME = "T0"
 		elif(var.CAN_ADDRESS == "82")

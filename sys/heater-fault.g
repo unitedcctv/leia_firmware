@@ -21,8 +21,6 @@ elif(var.CAN_ADDRESS == "30")
 	set var.CAN_ADDRESS = "left Z motor"
 elif(var.CAN_ADDRESS == "31")
 	set var.CAN_ADDRESS = "Right Z motor"
-elif(var.CAN_ADDRESS == "70")
-	set var.CAN_ADDRESS = "Stage"
 elif(var.CAN_ADDRESS == "81")
 	set var.CAN_ADDRESS = "T0"
 elif(var.CAN_ADDRESS == "82")

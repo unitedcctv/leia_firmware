@@ -57,10 +57,10 @@ global probeParameters = {(-5462.51-var.PROBE_OFFSET_PARAM), (6014.23-var.PROBE_
 ; M98 P"/macros/assert/board_present.g" D70 Y"Stage board is required for PROBES" F{var.CURRENT_FILE} E15152
 
 ; Creation of the sensor
-M308 S{global.PROBE_SENSOR_ID} P{global.PROBE_SENSOR_PORT} Y{var.PROBE_SENSOR_TYPE} F1 B{global.probeParameters[0]} C{global.probeParameters[1]} A{var.PROBE_SENSOR_NAME}
-M98 P"/macros/assert/result.g" R{result} Y"Unable to create probe sensor" F{var.CURRENT_FILE} E15153
+;M308 S{global.PROBE_SENSOR_ID} P{global.PROBE_SENSOR_PORT} Y{var.PROBE_SENSOR_TYPE} F1 B{global.probeParameters[0]} C{global.probeParameters[1]} A{var.PROBE_SENSOR_NAME}
+;M98 P"/macros/assert/result.g" R{result} Y"Unable to create probe sensor" F{var.CURRENT_FILE} E15153
 
 global MODULE_PROBES = 0.2	; Setting the current version of this module
 ; -----------------------------------------------------------------------------
-M118 S{"[config.g] Configured "^var.CURRENT_FILE}
+;M118 S{"[config.g] Configured "^var.CURRENT_FILE}
 M99 ; Proper exit

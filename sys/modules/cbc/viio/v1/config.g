@@ -88,9 +88,6 @@ M98 P"/macros/get_id/sensor.g"
 M308 S{global.sensorId}  Y"shttemp"   	 P"10.dummy"	A"temp_cbc_x_p[°C]"		; Temperature sensor on the X motor board
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create onboard temperature sensor  of the X motor board" F{var.CURRENT_FILE} E11213
 
-M308 S{global.CBC_TEMP_SENSOR_SB_P}  Y"shttemp"   	 P"70.dummy"	A"temp_cbc_st_p[°C]"		; Temperature sensor on the stage board
-M98 P"/macros/assert/result.g" R{result} Y"Unable to create onboard temperature sensor  of the Stage board" F{var.CURRENT_FILE} E11214
-
 ; Onboard humidity sensor
 M98 P"/macros/get_id/sensor.g"
 M308 S{global.sensorId}  Y"shthumidity" P"30.dummy"	A"hum_pcb_z0[%]"		; Humidity sensor on the Z0 motor board
@@ -107,10 +104,6 @@ M98 P"/macros/assert/result.g" R{result} Y"Unable to create Board Humidity of th
 M98 P"/macros/get_id/sensor.g"
 M308 S{global.sensorId}  Y"shthumidity" P"10.dummy"	A"hum_pcb_x[%]"			; Humidity sensor on the X motor board
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create Board Humidity of the X motor board" F{var.CURRENT_FILE} E11223
-
-M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId}  Y"shthumidity" P"70.dummy"	A"hum_pcb_st[%]"		; Humidity sensor on the Stage board
-M98 P"/macros/assert/result.g" R{result} Y"Unable to create Board Humidity of the Stage board" F{var.CURRENT_FILE} E11224
 
 ; Heater as FAN (exception for this case)
 M950 F{global.CBC_HEATER} 	 C{var.HEATER_OUT} Q1
@@ -162,8 +155,6 @@ M98 P"/macros/sensors/sanity_check.g" N"hum_pcb_x[%]" A{var.HUM_SENS_LOW_RANGE} 
 M598
 M98 P"/macros/sensors/sanity_check.g" N"hum_pcb_y[%]" A{var.HUM_SENS_LOW_RANGE}  B{var.HUM_SENS_UPPER_RANGE}
 M598
-M98 P"/macros/sensors/sanity_check.g" N"hum_pcb_st[%]" A{var.HUM_SENS_LOW_RANGE} B{var.HUM_SENS_UPPER_RANGE}
-M598
 M98 P"/macros/sensors/sanity_check.g" N"temp_cbc_z0_p[°C]" A{var.PCB_TEMP_LOW_RANGE} B{var.PCB_TEMP_UPPER_RANGE}
 M598
 M98 P"/macros/sensors/sanity_check.g" N"temp_cbc_z1_p[°C]" A{var.PCB_TEMP_LOW_RANGE} B{var.PCB_TEMP_UPPER_RANGE}
@@ -171,10 +162,6 @@ M598
 M98 P"/macros/sensors/sanity_check.g" N"temp_cbc_x_p[°C]" A{var.PCB_TEMP_LOW_RANGE} B{var.PCB_TEMP_UPPER_RANGE}
 M598
 M98 P"/macros/sensors/sanity_check.g" N"temp_cbc_y_p[°C]" A{var.PCB_TEMP_LOW_RANGE} B{var.PCB_TEMP_UPPER_RANGE}
-M598
-M98 P"/macros/sensors/sanity_check.g" N"temp_cbc_st_p[°C]" A{var.PCB_TEMP_LOW_RANGE} B{var.PCB_TEMP_UPPER_RANGE}
-M598
-;M98 P"/macros/sensors/sanity_check.g" N"temp_cbc_st[°C]" A{var.PCB_TEMP_LOW_RANGE} B{var.PCB_TEMP_UPPER_RANGE}
 
 ; CBC circulation fans:
 ; (!) These Fans are configured as normal outputs and they will stay always on.
