@@ -18,7 +18,6 @@ M98 P"/sys/modules/xy_calibration/viio/v0/config.g"
 M98 P"/macros/extruder/automatic_detection.g" T0
 M98 P"/macros/extruder/automatic_detection.g" T1
 
-M98 P"/sys/modules/fhx/viio/v0/config.g"			; FHX			VIIO 	v0
 
 ; -----------------------------------------------------------------------------
 M99
