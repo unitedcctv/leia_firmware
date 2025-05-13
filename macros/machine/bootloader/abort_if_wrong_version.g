@@ -36,10 +36,6 @@ while iterations < #boards
 			set var.BOARD_NAME = "T0"
 		elif(var.CAN_ADDRESS == "82")
 			set var.BOARD_NAME = "T1"
-		elif(var.CAN_ADDRESS == "40")
-			set var.BOARD_NAME = "Infinity box T0"
-		elif(var.CAN_ADDRESS == "41")
-			set var.BOARD_NAME = "Infinity box T1"
 
 		M118 S{"[abort_if_wrong_version.g] Bootloader version mismatch for CAN: "^var.CAN_ADDRESS^". Expected: 3.6.0.3 - Found: "^var.BOOTLOADER_VERSION}
 		M98 P"/macros/assert/abort.g" Y{"Invalid Bootloader Version for "^var.BOARD_NAME^" board. Please update Firmware"}  F{var.CURRENT_FILE} E62310

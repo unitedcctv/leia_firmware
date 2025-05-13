@@ -45,12 +45,6 @@ while iterations < #boards
 		set var.boardName = "Z axis left board"
 	elif(boards[iterations].canAddress == 31)
 		set var.boardName = "Z axis right board"
-	elif(boards[iterations].canAddress == 40)
-		set var.boardName = "Infinity box T0 board"
-	elif(boards[iterations].canAddress == 41)
-		set var.boardName = "Infinity box T1 board"
-	elif(boards[iterations].canAddress == 70)
-		set var.boardName = "Stage board"
 	elif(boards[iterations].canAddress == 81)
 		set var.boardName = "T0 board"
 	elif(boards[iterations].canAddress == 82)
