@@ -132,15 +132,6 @@ var AXIS_MAXIMUM_PARAMETER = 0		; [bool] Set axis maximum (default), 1 = set axi
 var ENDSTOP_TRIGGERING_POINT	= -500		; [um] Point where the endstops Zmin is triggered
 var EMERGENCY_TRIGGERING_POINT	= -2500		; [um] Point where the emergency is triggered
 
-; Getting the endstops trigger points
-M98 P"/macros/sensors/adc/target_counts_from_range.g" B{global.probeParameters[0]} T{global.probeParameters[1]} D{var.ENDSTOP_TRIGGERING_POINT}
-M98 P"/macros/assert/abort_if_null.g" R{global.adcTargetCounts} Y{"Failed getting the range"}  	F{var.CURRENT_FILE} E10540
-var ADC_ENDSTOP_TRIGGERING_POINT = global.adcTargetCounts ; ADC endstop point
-
-; Getting the emergency trigger points
-M98 P"/macros/sensors/adc/target_counts_from_range.g" B{global.probeParameters[0]} T{global.probeParameters[1]} D{var.EMERGENCY_TRIGGERING_POINT}
-M98 P"/macros/assert/abort_if_null.g" R{global.adcTargetCounts} Y{"Failed getting the range"}  	F{var.CURRENT_FILE} E10541
-var ADC_EMERGENCY_TRIGGERING_POINT = global.adcTargetCounts ; ADC emergency point
 ; Get the input ID for the emergency
 M98 P"/macros/get_id/input.g"
 var EMERGENCY_INPUT_ID = global.inputId

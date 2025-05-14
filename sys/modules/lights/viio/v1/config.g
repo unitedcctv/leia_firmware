@@ -28,6 +28,7 @@ M98 P"/macros/assert/result.g" R{result} Y"Unable to create the CBC_LIGHTS outpu
 M950 P{global.Y_AXIS_LIGHTS_OUTPUT} C{var.Y_AXIS_LIGHTS_PORT} Q200
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create the Y_AXIS_LIGHTS output"  F{var.CURRENT_FILE} E13104
 
+global MODULE_LIGHTS = 0.2	; Setting the current version of this module
 
 ; Setting the lights in the default status
 M98 P"/sys/modules/lights/viio/v1/set.g" L1 T0	; Turn ON the CBC lights
