@@ -16,7 +16,7 @@ var SENSOR_TYPE 	= "linear-analog"				; Type of sensor used
 var SENSOR_INPUT 	= "hall0"						; Analog input used in the OOF
 var SENSOR_INPUT_RETMOD = "detect"					; Analog input used in the retraction module
 ; CAN-FD ID related to the board.
-var BOARD_CAN_ID		= {81 + param.T} 			 	; As a number
+var BOARD_CAN_ID		= {83 + param.T} 			 	; As a number
 var CAN_ID_NAME			= {""^var.BOARD_CAN_ID} 		; As a string
 var SENSOR_PORT_OOF		= {var.CAN_ID_NAME^"."^var.SENSOR_INPUT}	; OOF Sensor port
 var SENSOR_NAME_OOF 	= {"oof_t"^param.T^"[mV]"}		; Name used to idenfity the OOF sensor

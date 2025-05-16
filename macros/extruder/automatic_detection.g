@@ -45,5 +45,6 @@ else
 	M98 P"/sys/modules/extruders/qr/v2/config.g" T{param.T}
 
 ; -----------------------------------------------------------------------------
+M118 S{"[TOOL] "^var.BOARD_ADDRESS^" board connected to T"^param.T}
 M118 S{"[TOOL] Done "^var.CURRENT_FILE}
 M99 ; Proper exit

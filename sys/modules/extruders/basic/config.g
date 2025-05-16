@@ -36,10 +36,10 @@ if (!exists(global.tooldleWaitTime))
 	global tooldleWaitTime = 20 * 60 ;[sec] 20 minutes
 	
 ; CAN-FD ID related to the board.
-var BOARD_CAN_ID		= {81 + param.T} 		; As a number
+var BOARD_CAN_ID		= {83 + param.T} 		; As a number
 var BOARD_CAN_ID_NAME	= {""^var.BOARD_CAN_ID} ; As a string
 var boardName = ""
-if(var.BOARD_CAN_ID == 81)
+if(var.BOARD_CAN_ID == 83)
 	set var.boardName = "T0 board"
 else
 	set var.boardName = "T1 board"
@@ -60,7 +60,7 @@ var HEATER_MAX_TEMP		= 320				; [ºC] Max. temperature allowed in
 											; the extruder
 
 ; Feeder motor
-var FEEDER_MOTOR		= {81.0 + param.T}	; Feeder motor
+var FEEDER_MOTOR		= {83.0 + param.T}	; Feeder motor
 var FEEDER_STEPS_MM		= 27.109			; [1/mm] Steps per mm without microstepping
 var FEEDER_MICROSTEPS	= 64				; [] Steps per mm without microstepping
 var FEEDER_SPEED		= 3000				; [mm/min] Max speed

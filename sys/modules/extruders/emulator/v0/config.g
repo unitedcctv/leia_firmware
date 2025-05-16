@@ -53,7 +53,7 @@ set global.toolFanId[param.T]	= global.fanId
 
 ; CONFIGURATION ------------------------------------------------------------------------------
 ; Check boards
-; M98 P"/macros/assert/board_present.g" D{81 + param.T} Y{"Board 8"^{1+param.T} " is required for EXTRUDER"}
+; M98 P"/macros/assert/board_present.g" D{83 + param.T} Y{"Board 8"^{1+param.T} " is required for EXTRUDER"}
 
 M308 S{var.TEMP_SENSOR_ID}  Y"emu-sensor" R100 F1000 C450 A{"temp_t"^param.T^"[°C]"}  	; Emulated temp. sensor
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create emulated temp. sensor for the extruder" F{var.CURRENT_FILE} E12686

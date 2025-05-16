@@ -12,7 +12,7 @@ M98 P"/macros/assert/abort_if_null.g" R{param.T}  	  Y{"Input parameter T is nul
 M98 P"/macros/assert/abort_if.g" R{(param.T>=2||param.T<0)}  Y{"Unexpected tool value"} F{var.CURRENT_FILE} E12622
 
 ; CAN-FD ID related to the board.
-var BOARD_CAN_ID		= {81 + param.T} 		; As a number
+var BOARD_CAN_ID		= {83 + param.T} 		; As a number
 var BOARD_CAN_ID_NAME	= {""^var.BOARD_CAN_ID} ; As a string
 
 ; Constant values
