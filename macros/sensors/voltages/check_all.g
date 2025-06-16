@@ -39,7 +39,7 @@ while iterations < #boards
 		set var.boardName = "Main board"
 	elif(boards[iterations].canAddress == 10)
 		set var.boardName = "X axis board"
-	elif(boards[iterations].canAddress == 20)
+	elif(boards[iterations].canAddress == 25)
 		set var.boardName = "Y axis board"
 	elif(boards[iterations].canAddress == 30)
 		set var.boardName = "Z axis left board"

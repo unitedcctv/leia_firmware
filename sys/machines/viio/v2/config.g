@@ -2,6 +2,10 @@
 ; 	Basic configuration of the VIIO V2
 ;------------------------------------------------------------------------------
 
+; Change Y motor board address from 20 to 25
+; 20 is default duet tool board.
+M999 B20 B25
+
 ; Setting the modules for this machine ----------------------------------------
 M98 P"/sys/modules/network/viio/v0/config.g"
 M98 P"/sys/modules/emergency/viio/v1/config.g"

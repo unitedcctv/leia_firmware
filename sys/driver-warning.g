@@ -17,7 +17,7 @@ if(var.canAddress == "0")
 	set var.canAddress = "Main"
 elif(var.canAddress == "10")
 	set var.canAddress = "X motor"
-elif(var.canAddress == "20")
+elif(var.canAddress == "25")
 	set var.canAddress = "Y motor"
 elif(var.canAddress == "30")
 	set var.canAddress = "left Z motor"
@@ -25,14 +25,10 @@ elif(var.canAddress == "31")
 	set var.canAddress = "Right Z motor"
 elif(var.canAddress == "70")
 	set var.canAddress = "Stage"
-elif(var.canAddress == "81")
+elif(var.canAddress == "20")
 	set var.canAddress = "T0"
-elif(var.canAddress == "82")
+elif(var.canAddress == "21")
 	set var.canAddress = "T1"
-elif(var.canAddress == "40")
-	set var.canAddress = "Infinity box T0 motor"
-elif(var.canAddress == "41")
-	set var.canAddress = "Infinity box T1 motor"
 ; Param.P look up table-------------------------------------------------------
 if(exists(param.P))
 	var driverStatusWord = param.P	; We need to translate the status word to decode the error/warning state

@@ -52,7 +52,7 @@ M400
 
 ; if it is safe to move, move the extruder -------------------------------------
 if (!var.moveSafe)
-	M98 P"/macros/extruder/led_strip/set_mode.g" T{param.T} S"warning"
+	; LED strip removed
 	M118 S{"[tpre.g] Done "^var.CURRENT_FILE}
 	M99
 M400
@@ -82,7 +82,7 @@ while global.touchLinearInstalled[param.T] ; this is a loop, so that we can use 
 	var posDiff = var.actualPos - var.TARGET_POS
 	M118 S{"[tpre.g] T"^param.T^" target diff: "^var.posDiff}
 	if (abs(var.posDiff) > var.POSITIONING_TOLERANCE)
-		M98 P"/macros/extruder/led_strip/set_mode.g" T{param.T} S"warning"
+		; LED strip removed
 		M118 S{"[tpre.g] T"^param.T^" did not reach target position, retrying"}
 		; try once more to move up and to target position
 		if param.T == 0
@@ -99,14 +99,14 @@ while global.touchLinearInstalled[param.T] ; this is a loop, so that we can use 
 		M118 S{"[tpre.g] T"^param.T^" target diff: "^var.posDiff}
 		if (abs(var.posDiff) > var.POSITIONING_TOLERANCE)
 			M118 S{"[tpre.g] T"^param.T^" could not be selected"}
-			M98 P"/macros/extruder/led_strip/set_mode.g" T{param.T} S"error"
+			; LED strip removed
 			set global.toolPositioningFailed[param.T] = true
 			M118 S{"[tpre.g] Done "^var.CURRENT_FILE}
 			M99
 	break ; since this loop should run only once, we break out of it here
 M400
 
-M98 P"/macros/extruder/led_strip/set_mode.g" T{param.T} S"selected"
+; LED strip removed
 ; -----------------------------------------------------------------------------
 M118 S{"[tpre.g] Done "^var.CURRENT_FILE}
 M99 ; Proper exit

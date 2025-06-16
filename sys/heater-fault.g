@@ -15,13 +15,13 @@ if(var.CAN_ADDRESS == "0")
 	set var.CAN_ADDRESS = "Main"
 elif(var.CAN_ADDRESS == "10")
 	set var.CAN_ADDRESS = "X motor"
-elif(var.CAN_ADDRESS == "20")
+elif(var.CAN_ADDRESS == "25")
 	set var.CAN_ADDRESS = "Y motor"
 elif(var.CAN_ADDRESS == "30")
 	set var.CAN_ADDRESS = "left Z motor"
 elif(var.CAN_ADDRESS == "31")
 	set var.CAN_ADDRESS = "Right Z motor"
-elif(var.CAN_ADDRESS == "83")
+elif(var.CAN_ADDRESS == "20")
 	set var.CAN_ADDRESS = "T0"
 
 M400

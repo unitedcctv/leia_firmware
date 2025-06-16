@@ -13,7 +13,7 @@ if(var.canAddress == "0")
 	set var.canAddress = "Main"
 elif(var.canAddress == "10")
 	set var.canAddress = "X motor"
-elif(var.canAddress == "20")
+elif(var.canAddress == "25")
 	set var.canAddress = "Y motor"
 elif(var.canAddress == "30")
 	set var.canAddress = "left Z motor"
@@ -21,14 +21,10 @@ elif(var.canAddress == "31")
 	set var.canAddress = "Right Z motor"
 elif(var.canAddress == "70")
 	set var.canAddress = "Stage"
-elif(var.canAddress == "81")
+elif(var.canAddress == "20")
 	set var.canAddress = "T0"
-elif(var.canAddress == "82")
+elif(var.canAddress == "21")
 	set var.canAddress = "T1"
-elif(var.canAddress == "40")
-	set var.canAddress = "Infinity box T0 motor"
-elif(var.canAddress == "41")
-	set var.canAddress = "Infinity box T1 motor"
 ; report the error------------------------------------------------------------
 M98 P"/macros/report/event.g" Y{"CAN reconnected in %s board. Please check the CAN connection and restart the machine"} A{var.canAddress,}  F{var.CURRENT_FILE} V31400
 if state.status == "processing"

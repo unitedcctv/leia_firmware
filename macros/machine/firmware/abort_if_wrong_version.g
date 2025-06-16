@@ -20,15 +20,14 @@ while iterations < #boards
 			set var.BOARD_NAME = "Main"
 		elif(var.CAN_ADDRESS == "10")
 			set var.BOARD_NAME = "X motor"
-		elif(var.CAN_ADDRESS == "20")
+		elif(var.CAN_ADDRESS == "25")
 			set var.BOARD_NAME = "Y motor"
 		elif(var.CAN_ADDRESS == "30")
 			set var.BOARD_NAME = "left Z motor"
 		elif(var.CAN_ADDRESS == "31")
 			set var.BOARD_NAME = "Right Z motor"
-		elif(var.CAN_ADDRESS == "83")
-			set var.BOARD_NAME = "T0"
-		
+		elif(var.CAN_ADDRESS == "20")
+			set var.BOARD_NAME = "T0"		
 		M118 S{"[abort_if_wrong_version.g] Firmware version mismatch for CAN: "^var.CAN_ADDRESS^". Expected: 3.6.0.3 - Found: "^var.FIRMWARE_VERSION}
 		M98 P"/macros/assert/abort.g" Y{"Invalid Firmware Version for "^var.BOARD_NAME^" board. Please update Firmware"}  F{var.CURRENT_FILE} E62310
 

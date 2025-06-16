@@ -49,7 +49,7 @@ M400
 M568 P{param.T} S{var.ACTIVE_TEMP} R{var.ACTIVE_TEMP} A2
 
 ; Set the LED -----------------------------------------------------------------
-M98 P"/macros/extruder/led_strip/set_mode.g" T{param.T} S"idle"
+; LED strip feature removed
 
 ; -----------------------------------------------------------------------------
 M118 S{"[tfree.g] Done "^var.CURRENT_FILE}

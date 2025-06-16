@@ -36,10 +36,10 @@ if (!exists(global.tooldleWaitTime))
 	global tooldleWaitTime = 20 * 60 ;[sec] 20 minutes
 	
 ; CAN-FD ID related to the board.
-var BOARD_CAN_ID		= {83 + param.T} 		; As a number
+var BOARD_CAN_ID		= {20 + param.T} 		; As a number
 var BOARD_CAN_ID_NAME	= {""^var.BOARD_CAN_ID} ; As a string
 var boardName = ""
-if(var.BOARD_CAN_ID == 83)
+if(var.BOARD_CAN_ID == 20)
 	set var.boardName = "T0 board"
 else
 	set var.boardName = "T1 board"

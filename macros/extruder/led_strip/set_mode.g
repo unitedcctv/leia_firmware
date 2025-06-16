@@ -26,7 +26,8 @@
 ;	from 255 -> 25.5 sec).
 ;------------------------------------------------------------------------------
 
-var CURRENT_FILE = "/macros/extruder/led_strip/set_mode.g"
+; LED strip support removed - this macro is now empty
+M99
 
 ; Checking global variables and input parameters ------------------------------
 if !exists(param.T)
