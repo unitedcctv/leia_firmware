@@ -52,6 +52,16 @@ var TEMP_SENSOR_TYPE	= "pt1000"
 M98 P"/macros/get_id/sensor.g"	
 var TEMP_SENSOR_ID 		= global.sensorId	; ID of the emulated temperature Sensor
 
+; Aux. Temperature sensor of the heater
+var AUX_TEMP_SENSOR_PORT= {var.BOARD_CAN_ID_NAME^".temp1"}	; Port
+M98 P"/macros/get_id/sensor.g"	
+var AUX_TEMP_SENSOR_ID 		= global.sensorId	; ID of the emulated temperature Sensor
+
+if !exists(global.toolAuxTempIDs)
+	global toolAuxTempIDs = {null,null}
+
+set global.toolAuxTempIDs[param.T] = var.AUX_TEMP_SENSOR_ID
+
 ; Heater
 var HEATER_PORT	  		= {var.BOARD_CAN_ID_NAME^".out0"}	; Port used
 M98 P"/macros/get_id/heater.g"

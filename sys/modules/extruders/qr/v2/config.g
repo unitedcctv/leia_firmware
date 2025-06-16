@@ -81,7 +81,7 @@ var OFFSET_X_DEFAULT 	= {-8.35,-8.35}		; [mm] Default offset in X for T0 and T1
 var OFFSET_Y_DEFAULT 	= {-48.9, 47.1}		; [mm] Default offset in Y for T0 and T1
 
 ; Feeder motor
-var FEEDER_MOTOR		= {83.0 + param.T}	; Feeder motor
+var FEEDER_MOTOR		= {20.0 + param.T}	; Feeder motor
 var FEEDER_STEPS_MM		= 32.125			; [1/mm] Steps per mm without microstepping
 ;var FEEDER_STEPS_MM		= 33.74				; [1/mm] Steps per mm without microstepping
 var FEEDER_MICROSTEPS	= 64				; [] Steps per mm without microstepping
