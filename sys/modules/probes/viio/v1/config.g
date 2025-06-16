@@ -1,5 +1,5 @@
 ; Description:
-; 	Bltouch sensor on the Y board CAN 20
+; 	Bltouch sensor on the Duet 3 Toolboard 1LC board CAN 20
 ;------------------------------------------------------------------------------
 var CURRENT_FILE = "/sys/modules/probes/viio/v1/config.g"
 M118 S{"[config.g] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[state.thisInput].stackDepth}
@@ -8,8 +8,8 @@ M118 S{"[config.g] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^input
 M98 P"/macros/assert/abort_if.g" R{exists(global.MODULE_PROBES)}  	Y{"A previous PROBES configuration exists"} F{var.CURRENT_FILE} E15151
 
 ; DEFINITIONS -----------------------------------------------------------------
-var PROBE_SENSOR_PIN 		= "20.io4.in"		; Port where the probe is connected.
-var PROBE_CONTROL_PIN 		= "20.out5"		; Pin used to control the probe
+var PROBE_SENSOR_PIN 		= "20.io0.in"		; Port where the probe is connected.
+var PROBE_CONTROL_PIN 		= "20.io0.out"		; Pin used to control the probe
 
 var PROBE_SENSOR_NAME =	"bltouch"	; Name used to idenfity the probe sensor 
 var PROBE_DIVE_HEIGHT = 10					; [mm] Height of the dive

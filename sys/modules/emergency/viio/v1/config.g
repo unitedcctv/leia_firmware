@@ -9,8 +9,8 @@ M118 S{"[CONFIG] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[
 M98 P"/macros/assert/abort_if.g" R{exists(global.MODULE_EMERGENCY)}  Y{"A previous EMERGENCY configuration exists"} F{var.CURRENT_FILE} E12170
 
 ; DEFINITIONS --------------------------------------------------------------------------------
-var EMERGENCY_DOOR_ALL_INPUTS 	 = {"10.emerg", "20.emerg", "30.emerg", "31.emerg", "0.io4.in"}		; List of boards with emergency input
-var EMERGENCY_DOOR_INPUT_TRIGGER = "20.emerg" 				; This pin will trigger the event.
+var EMERGENCY_DOOR_ALL_INPUTS 	 = {"10.emerg", "25.emerg", "30.emerg", "31.emerg", "0.io4.in"}		; List of boards with emergency input
+var EMERGENCY_DOOR_INPUT_TRIGGER = "25.emerg" 				; This pin will trigger the event.
 
 M98 P"/macros/get_id/trigger.g"
 var EMERGENCY_TRIGGER_ID = global.triggerId 	; Trigger id called when the event is 
@@ -46,7 +46,7 @@ global emergencyGeneralIsTriggered 	= true
 
 ; Checking for board
 M98 P"/macros/assert/board_present.g" D10 Y"X axis motor board is required for EMERGENCY" F{var.CURRENT_FILE} E12171
-M98 P"/macros/assert/board_present.g" D20 Y"Y axis motor board is  required for EMERGENCY" F{var.CURRENT_FILE} E12172
+M98 P"/macros/assert/board_present.g" D25 Y"Y axis motor board is  required for EMERGENCY" F{var.CURRENT_FILE} E12172
 M98 P"/macros/assert/board_present.g" D30 Y"Z axis left motor board is required for EMERGENCY" F{var.CURRENT_FILE} E12173
 M98 P"/macros/assert/board_present.g" D31 Y"Z axis right motor board is required for EMERGENCY" F{var.CURRENT_FILE} E12174
 

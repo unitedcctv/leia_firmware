@@ -62,7 +62,7 @@ if (!exists(global.cbcIdleWaitTime))
 
 ; Checking for board
 M98 P"/macros/assert/board_present.g" D10 Y"X axis motor board is required for CBC" F{var.CURRENT_FILE} E11200
-M98 P"/macros/assert/board_present.g" D20 Y"Y axis motor board is required for CBC" F{var.CURRENT_FILE} E11201
+M98 P"/macros/assert/board_present.g" D25 Y"Y axis motor board is required for CBC" F{var.CURRENT_FILE} E11201
 M98 P"/macros/assert/board_present.g" D30 Y"Z axis left motor board is required for CBC" F{var.CURRENT_FILE} E11202
 M98 P"/macros/assert/board_present.g" D31 Y"Z axis right motor board is required for CBC" F{var.CURRENT_FILE} E11203
 
@@ -81,7 +81,7 @@ M308 S{global.sensorId}  Y"shttemp" 	 P"31.dummy"	A"temp_cbc_z1_p[°C]"
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create onboard temperature sensor  of the Z axis right motor board" F{var.CURRENT_FILE} E11211
 
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId}  Y"shttemp" 	 P"20.dummy"	A"temp_cbc_y_p[°C]"		; Temperature sensor on the Y motor board
+M308 S{global.sensorId}  Y"shttemp" 	 P"25.dummy"	A"temp_cbc_y_p[°C]"		; Temperature sensor on the Y motor board
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create onboard temperature sensor  of the Y motor board" F{var.CURRENT_FILE} E11212
 
 M98 P"/macros/get_id/sensor.g"
@@ -98,7 +98,7 @@ M308 S{global.sensorId}  Y"shthumidity" P"31.dummy"	A"hum_pcb_z1[%]"		; Humidity
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create Board Humidity of the Z axis right motor board" F{var.CURRENT_FILE} E11221
 
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId}  Y"shthumidity" P"20.dummy"	A"hum_pcb_y[%]"			; Humidity sensor on the Y motor board
+M308 S{global.sensorId}  Y"shthumidity" P"25.dummy"	A"hum_pcb_y[%]"			; Humidity sensor on the Y motor board
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create Board Humidity of the Y motor board" F{var.CURRENT_FILE} E11222
 
 M98 P"/macros/get_id/sensor.g"

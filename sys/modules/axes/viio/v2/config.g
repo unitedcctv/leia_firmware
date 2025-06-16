@@ -26,7 +26,7 @@ M98 P"/macros/assert/abort_if.g" R{(global.MODULE_PROBES < 0.2)}  Y{"Modules PRO
 ; Motors
 var X_MOTOR_DRIVER_F	= 10.0		; Set motor driver number for X Motor, back
 var X_MOTOR_DRIVER_B	= 10.1		; Set motor driver number for X Motor, front
-var Y_MOTOR_DRIVER		= 20.0		; Set motor driver number for Y Motor
+var Y_MOTOR_DRIVER		= 25.0		; Set motor driver number for Y Motor
 var Z_MOTOR_DRIVER_L_F	= 30.1		; Set motor driver number for Z Motor, left, front
 var Z_MOTOR_DRIVER_L_B	= 30.0		; Set motor driver number for Z Motor, left, back
 var Z_MOTOR_DRIVER_R_F	= 31.0		; Set motor driver number for Z Motor, right, front
@@ -37,7 +37,7 @@ var GEARBOXES_INSTALLED = fileexists("/sys/modules/axes/viio/v2/_gearboxes_insta
 
 ; Endstops
 var X_ENDSTOP_PORT 		= "!10.io3.in"
-var Y_ENDSTOP_PORT 		= "!20.io0.in"
+var Y_ENDSTOP_PORT 		= "!25.io0.in"
 var Z_ENDSTOP_PORT 		= "!30.io0.in+!30.io3.in+!31.io0.in+!31.io3.in"
 
 ; Motion parameters
@@ -142,7 +142,7 @@ var EMERGENCY_TRIGGER_ID = global.triggerId 				; Trigger id called when the eve
 
 ; Check for availability of X,Y,Z motorboards----------------------------------
 M98 P"/macros/assert/board_present.g" D10 Y"X axis motor board is required for axes" F{var.CURRENT_FILE} E10542
-M98 P"/macros/assert/board_present.g" D20 Y"Y axis motor board is required for axes" F{var.CURRENT_FILE} E10543
+M98 P"/macros/assert/board_present.g" D25 Y"Y axis motor board is required for axes" F{var.CURRENT_FILE} E10543
 M98 P"/macros/assert/board_present.g" D30 Y"Z axis left motor board is required for axes" F{var.CURRENT_FILE} E10544
 M98 P"/macros/assert/board_present.g" D31 Y"Z axis right motor board is required for axes" F{var.CURRENT_FILE} E10545
 
@@ -253,7 +253,7 @@ M98  P"/macros/assert/result.g" R{result} Y"Unable to set axis maximum for Z" F{
 M574 X{var.X_ENDSTOP_POSITION} S{var.X_ENDSTOP_TYPE} P{var.X_ENDSTOP_PORT} ; configure active-high endstop for low end on X via pins !10.io0.in+!10.io3.in
 M98  P"/macros/assert/result.g" R{result} Y"Unable to configure the endstop for X" F{var.CURRENT_FILE} E10583
 
-M574 Y{var.Y_ENDSTOP_POSITION} S{var.Y_ENDSTOP_TYPE} P{var.Y_ENDSTOP_PORT} ; configure active-high endstop for low end on Y via pin !20.io0.in
+M574 Y{var.Y_ENDSTOP_POSITION} S{var.Y_ENDSTOP_TYPE} P{var.Y_ENDSTOP_PORT} ; configure active-high endstop for low end on Y via pin !25.io0.in
 M98  P"/macros/assert/result.g" R{result} Y"Unable to configure the endstop for Y" F{var.CURRENT_FILE} E10584
 
 M574 Z{var.Z_ENDSTOP_POSITION} S{var.Z_ENDSTOP_TYPE} P{var.Z_ENDSTOP_PORT} ; configure active-high endstop for high end on Z via pin !30.io0.in+!30.io3.in+!31.io0.in+!31.io3.in

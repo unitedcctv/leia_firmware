@@ -12,7 +12,7 @@ var CBC_LIGHTS_PORT = "0.out1"				;variable to store the Pin id of the Light por
 M98 P"/macros/get_id/output.g"
 global CBC_LIGHTS_OUTPUT = global.outputId	;variable to store the output id of the Light port
 
-var Y_AXIS_LIGHTS_PORT = "20.out1"
+var Y_AXIS_LIGHTS_PORT = "25.out1"
 M98 P"/macros/get_id/output.g"
 global Y_AXIS_LIGHTS_OUTPUT = global.outputId
 
