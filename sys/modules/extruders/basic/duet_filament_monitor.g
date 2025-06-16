@@ -12,7 +12,7 @@ M98 P"/macros/assert/abort_if_null.g" R{param.T}  	  Y{"Input parameter T is nul
 M98 P"/macros/assert/abort_if.g" R{(param.T>=2||param.T<0)}  Y{"Unexpected tool value"} F{var.CURRENT_FILE} E12622
 
 ; CAN-FD ID related to the board.
-var BOARD_CAN_ID		= {83 + param.T} 		; As a number
+var BOARD_CAN_ID		= {20 + param.T} 		; As a number
 var BOARD_CAN_ID_NAME	= {""^var.BOARD_CAN_ID} ; As a string
 
 ; Constant values
@@ -22,7 +22,7 @@ var FILAMENT_RATIO_SCALE		= 1.85			; [%] Scale to adjust to %
 if(!exists(global.flowMonitoringActive))
 	global flowMonitoringActive = true 			; To enable and disable the flow monitor
 ; Filament monitor in the object model
-M591 D{tools[param.T].extruders[0]} P3 C{var.BOARD_CAN_ID_NAME^".io0.in"} S1 R5:150 L26.0 E1 A0
+M591 D{tools[param.T].extruders[0]} P3 C{var.BOARD_CAN_ID_NAME^".io1.in"} S1 R5:150 L26.0 E1 A0
 M98 P"/macros/assert/result.g" R{result} Y{"Unable to create the filament monitor sensor for tool %s"} A{param.T,} F{var.CURRENT_FILE} E12623
 
 ; Filament monitor sensors: MOVE

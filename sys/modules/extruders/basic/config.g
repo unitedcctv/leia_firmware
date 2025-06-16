@@ -53,7 +53,7 @@ M98 P"/macros/get_id/sensor.g"
 var TEMP_SENSOR_ID 		= global.sensorId	; ID of the emulated temperature Sensor
 
 ; Heater
-var HEATER_PORT	  		= {var.BOARD_CAN_ID_NAME^".heater"}	; Port used
+var HEATER_PORT	  		= {var.BOARD_CAN_ID_NAME^".out0"}	; Port used
 M98 P"/macros/get_id/heater.g"
 var HEATER_ID 			= global.heaterId	; ID of the Heater
 var HEATER_MAX_TEMP		= 320				; [ºC] Max. temperature allowed in
@@ -69,14 +69,14 @@ var FEEDER_ACCELERATION	= 500				; [mm/s^2] Max acceleration
 var FEEDER_CURRENT		= 650				; [mA] Current of the motor
 
 ; Tool FAN with tachometer
-var FAN_TOOL_PORT 		= {var.BOARD_CAN_ID_NAME^".fan0"}	; Tool FAN
-var FAN_TOOL_TACH_PORT	= {"+fan0.tach"}	; Tool FAN tachometer
+var FAN_TOOL_PORT 		= {var.BOARD_CAN_ID_NAME^".out1"}	; Tool FAN
+var FAN_TOOL_TACH_PORT	= {"out1.tach"}	; Tool FAN tachometer
 M98 P"/macros/get_id/fan.g"
 var FAN_TOOL_ID 		= global.fanId		; ID to use for the tool Fan
 var FAN_TOOL_NAME		= {"tool_t"^param.T}
 
 ; Cold-end FAN controlled by temperature
-var FAN_COLDEND_PORT 	= {var.BOARD_CAN_ID_NAME^".fan1"}	; Cold-end FAN
+var FAN_COLDEND_PORT 	= {var.BOARD_CAN_ID_NAME^".out2"}	; Cold-end FAN
 M98 P"/macros/get_id/fan.g"
 var FAN_COLDEND_ID 		= global.fanId		; ID to use for the cold-end fan
 var FAN_COLDEND_TEMP_TRIGGER = 45			; [ºC] Temperature of the hot-end 
