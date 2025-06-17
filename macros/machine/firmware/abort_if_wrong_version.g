@@ -12,6 +12,9 @@ M118 S{"[abort_if_wrong_version.g] Starting "^var.CURRENT_FILE}
 while iterations < #boards
 	var FIRMWARE_VERSION = {""^boards[iterations].firmwareVersion}
 	var CAN_ADDRESS = {""^(exists(boards[iterations].canAddress) ? boards[iterations].canAddress : "0")}
+	; Skip firmware version check for ignored boards (CAN addresses 121 and 20)
+	if (var.CAN_ADDRESS == "121" || var.CAN_ADDRESS == "20")
+		continue
 	var BOARD_NAME = "Unknown"
 	var NOT_VALID = (var.FIRMWARE_VERSION!="3.6.0.3")
 

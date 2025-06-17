@@ -77,14 +77,14 @@ var FEEDER_ACCELERATION	= 500				; [mm/s^2] Max acceleration
 var FEEDER_CURRENT		= 650				; [mA] Current of the motor
 
 ; Tool FAN with tachometer
-var FAN_TOOL_PORT 		= {var.BOARD_CAN_ID_NAME^".fan0"}	; Tool FAN
-var FAN_TOOL_TACH_PORT	= {"+fan0.tach"}	; Tool FAN tachometer
+var FAN_TOOL_PORT 		= {var.BOARD_CAN_ID_NAME^".out1"}	; Tool FAN
+var FAN_TOOL_TACH_PORT	= {var.BOARD_CAN_ID_NAME^".out1.tach"}	; Tool FAN tachometer
 M98 P"/macros/get_id/fan.g"
 var FAN_TOOL_ID 		= global.fanId		; ID to use for the tool Fan
 var FAN_TOOL_NAME		= {"tool_t"^param.T}
 
 ; Cold-end FAN controlled by temperature
-var FAN_COLDEND_PORT 	= {var.BOARD_CAN_ID_NAME^".fan1"}	; Cold-end FAN
+var FAN_COLDEND_PORT 	= {var.BOARD_CAN_ID_NAME^".out2"}	; Cold-end FAN
 M98 P"/macros/get_id/fan.g"
 var FAN_COLDEND_ID 		= global.fanId		; ID to use for the cold-end fan
 var FAN_COLDEND_TEMP_TRIGGER = 45			; [ºC] Temperature of the hot-end 

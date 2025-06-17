@@ -18,6 +18,9 @@ while iterations < #boards
 	
 	var BOOTLOADER_VERSION = {""^boards[iterations].bootloaderVersion}
 	var CAN_ADDRESS = {""^(exists(boards[iterations].canAddress) ? boards[iterations].canAddress : "0")}
+	; Skip bootloader version check for ignored boards (CAN addresses 121 and 20)
+	if (var.CAN_ADDRESS == "121" || var.CAN_ADDRESS == "20")
+		continue
 	var BOARD_NAME = "Unknown"
 	var NOT_VALID = (var.BOOTLOADER_VERSION!="3.6.0.3")
 

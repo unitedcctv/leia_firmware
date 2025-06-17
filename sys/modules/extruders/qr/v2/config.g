@@ -93,8 +93,8 @@ var FEEDER_CURRENT		= 1000				; [mA] Current of the motor
 ; Tool FAN with tachometer
 if(!exists(global.toolFanId))
 	global toolFanId = {null,null}	;global variable to store the tool fan ids
-var FAN_TOOL_PORT 		= {var.BOARD_CAN_ID_NAME^".fan0"}	; Tool FAN
-var FAN_TOOL_TACH_PORT	= {"+fan0.tach"}	; Tool FAN tachometer
+var FAN_TOOL_PORT 		= {var.BOARD_CAN_ID_NAME^".out1"}	; Tool FAN
+var FAN_TOOL_TACH_PORT	= {"+"^var.BOARD_CAN_ID_NAME^".out1.tach"}	; Tool FAN tachometer
 M98 P"/macros/get_id/fan.g"
 var FAN_TOOL_ID 		= global.fanId		; ID to use for the tool Fan
 set global.toolFanId[param.T]	= global.fanId
