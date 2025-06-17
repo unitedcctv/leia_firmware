@@ -70,7 +70,7 @@ var HEATER_MAX_TEMP		= 320				; [ºC] Max. temperature allowed in
 											; the extruder
 
 ; Feeder motor
-var FEEDER_MOTOR		= {83.0 + param.T}	; Feeder motor
+var FEEDER_MOTOR		= {20.0 + param.T}	; Feeder motor
 var FEEDER_STEPS_MM		= 27.109			; [1/mm] Steps per mm without microstepping
 var FEEDER_MICROSTEPS	= 64				; [] Steps per mm without microstepping
 var FEEDER_SPEED		= 3000				; [mm/min] Max speed

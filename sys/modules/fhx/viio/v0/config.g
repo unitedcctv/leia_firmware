@@ -35,59 +35,6 @@ var HAS_EXTRUDER_1 = (exists(global.MODULE_EXTRUDER_1) && global.MODULE_EXTRUDER
 if(!exists(global.boardIndexInOM))
 	global boardIndexInOM = null
 
-; Fhx box for tool 0
-M98 P"/macros/boards/get_index_in_om.g" A40
-var FILAMENT_BOX_0_ENABLED = (var.HAS_EXTRUDER_0 && global.boardIndexInOM != null)
-; Fhx box for tool 1
-M98 P"/macros/boards/get_index_in_om.g" A41
-var FILAMENT_BOX_1_ENABLED = (var.HAS_EXTRUDER_1 && global.boardIndexInOM != null)
-; setting the status of the FHX boxes
-if (!exists(global.FHX_ENABLED))
-	global FHX_ENABLED = { {var.HAS_EXTRUDER_0, var.FILAMENT_BOX_0_ENABLED}, {var.HAS_EXTRUDER_1, var.FILAMENT_BOX_1_ENABLED} }
-
-; configuring the motors and sensor of the fhx
-; Fhx box 0
-if(var.FILAMENT_BOX_0_ENABLED)
-	M569 P40.0 S0  ; Motor  -> S0 for turning ccw
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to configure the infinity box T0 left motor" F{var.CURRENT_FILE} E17606
-	M569 P40.1 S0  ; Motor  -> S0 for turning ccw
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to configure the infinity box T0 right motor" F{var.CURRENT_FILE} E17680
-	M400
-	M98 P"/sys/modules/fhx/viio/v0/sensors.g" T0
-M400
-; fhx box 1
-if(var.FILAMENT_BOX_1_ENABLED)
-	M569 P41.0 S0  ; Motor  -> S0 for turning ccw
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to configure the infinity box T1 left motor" F{var.CURRENT_FILE} E17607
-	M569 P41.1 S0  ; Motor  -> S0 for turning ccw
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to configure the the infinity box T1 right motor" F{var.CURRENT_FILE} E17681
-	M400
-	M98 P"/sys/modules/fhx/viio/v0/sensors.g" T1
-M400
-; drive mapping when both box exists
-if (var.FILAMENT_BOX_0_ENABLED && var.FILAMENT_BOX_1_ENABLED)
-	M584 E81.0:82.0:40.0:40.1:41.0:41.1
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to set the motor-mapping infinity box T0 and infinity box T1" F{var.CURRENT_FILE} E17608
-	M400
-	M98 P"/sys/modules/fhx/viio/v0/drive_mapping.g"
-	M400
-elif (var.FILAMENT_BOX_0_ENABLED)
-	if(var.HAS_EXTRUDER_1)
-		M584 E82.0:81.0:40.0:40.1
-	else
-		M584 E81.0:40.0:40.1
-	; single boxes are not supported, if mapping fails, indicate it to user
-	M98  P"/macros/assert/result.g" R{result} Y"T1 Infinity Box not detected. If not installed, please unplug T1 Extruder and restart machine" F{var.CURRENT_FILE} E17609
-	M400
-	M98 P"/sys/modules/fhx/viio/v0/drive_mapping.g" T0
-elif (var.FILAMENT_BOX_1_ENABLED)
-	if(var.HAS_EXTRUDER_0 )
-		M584 E81.0:82.0:41.0:41.1
-	else
-		M584 E82.0:41.0:41.1
-	; single boxes are not supported, if mapping fails, indicate it to user
-	M98  P"/macros/assert/result.g" R{result} Y"T0 Infinity Box not detected. If not installed, please unplug T0 Extruder and restart machine" F{var.CURRENT_FILE} E17651
-	M98 P"/sys/modules/fhx/viio/v0/drive_mapping.g" T1
 M400
 ; Create links
 M98 P"/macros/files/link/create.g" L"/macros/fhx/power/set.g" D"/sys/modules/fhx/viio/v0/power_set.g" I{"S",}
