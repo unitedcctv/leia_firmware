@@ -78,7 +78,7 @@ var FEEDER_CURRENT		= 650				; [mA] Current of the motor
 
 ; Tool FAN with tachometer
 var FAN_TOOL_PORT 		= {var.BOARD_CAN_ID_NAME^".out1"}	; Tool FAN
-var FAN_TOOL_TACH_PORT	= {var.BOARD_CAN_ID_NAME^".out1.tach"}	; Tool FAN tachometer
+var FAN_TOOL_TACH_PORT	= {"+"^var.BOARD_CAN_ID_NAME^".out1.tach"}	; Tool FAN tachometer
 M98 P"/macros/get_id/fan.g"
 var FAN_TOOL_ID 		= global.fanId		; ID to use for the tool Fan
 var FAN_TOOL_NAME		= {"tool_t"^param.T}
