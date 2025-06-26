@@ -25,7 +25,7 @@ G92 Z{move.axes[2].max}          ; tell firmware we are at Z max height
 G1  X500 Y250 F6000  ; adjust coords
 
 ;--- Move down 100 ----------------------------------------------------------
-G1 z-200
+;G1 Z-200 ; removed drop, using immediate BLTouch probe
 
 ;--- needs bl touch ---------------------------------------------------------
 ; Drop most of the way, leaving 10 mm clearance
@@ -35,9 +35,12 @@ G1 z-200
 ;G1  Z10 F600
 
 ;--- Probe the bed with BLTouch ---------------------------------------------
-;M401                             ; deploy probe  :contentReference[oaicite:0]{index=0}
-;G30                              ; single probe – sets Z = trigger height
-;M402                             ; retract probe
+M401                      ; deploy BLTouch on 20.io0
+G30                       ; single probe – sets Z = trigger height
+M402                      ; retract probe
+
+
+
 
 ;--- Lift a little so we’re not scraping ------------------------------------
 ;G91

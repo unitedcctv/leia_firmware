@@ -14,6 +14,9 @@ var PROBE_DIVE_HEIGHT = 10          ; mm
 var PROBING_SPEED     = 120         ; mm/min  (dive speed)
 var TRAVEL_SPEED      = 6000        ; mm/min  (between points)
 
+global PROBE_START_X = 500		; [mm] First point of the besh mesh in X
+global PROBE_START_Y = 250		; [mm] First point of the besh mesh in Y
+
 M950  S0 C{var.PROBE_CONTROL_PIN}         ; SERVO channel for BLTouch
 M558  P9 C{var.PROBE_SENSOR_PIN} H{var.PROBE_DIVE_HEIGHT} F{var.PROBING_SPEED} \
       T{var.TRAVEL_SPEED}

@@ -37,8 +37,9 @@ var CURRENT_TOOL = state.currentTool
 if(var.CURRENT_TOOL != -1)
 	T-1 ; Deselect the current extruder
 	M98  P"/macros/assert/result.g" R{result} Y"Unable to deselect the extruder" F{var.CURRENT_FILE}   E36005
-if( !move.axes[3].homed || ( exists(move.axes[4]) && !move.axes[4].homed ) )
-	M98 P"/sys/homeuw.g"
+; U/W lifter homing removed
+;if( !move.axes[3].homed || ( exists(move.axes[4]) && !move.axes[4].homed ) )
+;    M98 P"/sys/homeuw.g"
 
 ; Making sure the big motors are ON before moving -----------------------------
 M17 X Z

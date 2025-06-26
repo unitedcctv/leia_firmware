@@ -134,7 +134,7 @@ M98 P"/macros/assert/result.g" R{result} Y"Unable to set axis maxima in W" F{var
 M98 P"/macros/files/link/create.g" L"/macros/stage/calibrate_bed_touch.g" D"/sys/modules/stage/emulator/v0/calibrate_bed_touch.g"
 M98 P"/macros/files/link/create.g" L"/macros/stage/detect_bed_touch.g" D"/sys/modules/stage/emulator/v0/detect_bed_touch.g"
 M98 P"/macros/files/link/create.g" L"/sys/homeu.g"	D"/sys/modules/stage/emulator/v0/homing/u.g"
-M98 P"/macros/files/link/create.g" L"/sys/homeuw.g"	D"/sys/modules/stage/emulator/v0/homing/uw.g"
+;M98 P"/macros/files/link/create.g" L"/sys/homeuw.g"	D"/sys/modules/stage/emulator/v0/homing/uw.g"
 M98 P"/macros/files/link/create.g" L"/sys/homew.g"	D"/sys/modules/stage/emulator/v0/homing/w.g"
 
 ; Loading the bed touch values

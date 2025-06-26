@@ -38,10 +38,10 @@ M400
 ; home the u or w axis if not homed
 if var.TOOL == 0
 	if move.axes[3].homed == false
-		M98 P"/sys/homeu.g"
+		;M98 P"/sys/homeu.g"
 else
 	if move.axes[4].homed == false
-		M98 P"/sys/homew.g"
+		;M98 P"/sys/homew.g"
 M400
 
 M118 S{"[calibrate_pos_sensor.g] Using Sensor ID: " ^ var.SENSOR_ID ^ " for T" ^ var.TOOL}

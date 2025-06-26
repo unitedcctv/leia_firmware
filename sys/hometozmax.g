@@ -41,8 +41,8 @@ G4 S0.5
 M400
 
 ; Home UW if required ---------------------------------------------------------
-if( !move.axes[3].homed || ( exists(move.axes[4]) && !move.axes[4].homed ) )
-	M98 P"/sys/homeuw.g"
+;if( !move.axes[3].homed || ( exists(move.axes[4]) && !move.axes[4].homed ) )
+;	M98 P"/sys/homeuw.g" ; removed – no U/W axes
 
 ; Let's home XY ---------------------------------------------------------------
 M98 P"/sys/homexy.g" ; (!) This also lifts

@@ -12,17 +12,17 @@ M118 S{"[homeall.g] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inpu
 ; Checking global variables and input parameters ------------------------------
 M98 P"/macros/assert/abort_if.g" R{global.errorRestartRequired}  Y{"Previous error requires restart: Please restart the machine"} F{var.CURRENT_FILE} E35017
 ; Checking for files first
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/homeuw.g"}							F{var.CURRENT_FILE} E35001
+;M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/homeuw.g"}							F{var.CURRENT_FILE} E35001
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/homexy.g"}							F{var.CURRENT_FILE} E35002
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/homez.g"}							 F{var.CURRENT_FILE} E35003
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/stage/detect_bed_touch.g"}		 F{var.CURRENT_FILE} E35004
+;M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/stage/detect_bed_touch.g"}		 F{var.CURRENT_FILE} E35004
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/emergency/is_ready_to_operate.g"}  F{var.CURRENT_FILE} E35005
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/axes/home_to_zmax.g"}			  F{var.CURRENT_FILE} E35006
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/sensors/sanity_check.g"}			  F{var.CURRENT_FILE} E35014
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/xy_calibration/xy_calibration.g"} 		F{var.CURRENT_FILE} E35015
 ; Checking modules and global variables
 M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_AXES)}  Y{"Missing module AXES"}   F{var.CURRENT_FILE} E35007
-M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_STAGE)} Y{"Missing module STAGE"}  F{var.CURRENT_FILE} E35008
+;M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_STAGE)} Y{"Missing module STAGE"}  F{var.CURRENT_FILE} E35008
 M98 P"/macros/assert/abort_if.g" R{!exists(state.currentTool)}   Y{"In the OM, state.currentTool is missing"}   F{var.CURRENT_FILE} E35009
 ; Definitions -----------------------------------------------------------------
 var Z_HOMING_FINAL_POS 	= 30					; [mm] Final position in Z
@@ -115,12 +115,13 @@ M400
 T-1 ; Deselect the current extruder
 
 ; home only lifters for connected extruders ----------------------------------------
-if exists(global.MODULE_EXTRUDER_0) && exists(global.MODULE_EXTRUDER_1)
-	M98 P"/sys/homeuw.g"
-elif exists(global.MODULE_EXTRUDER_0)
-	M98 P"/sys/homeu.g"
-elif exists(global.MODULE_EXTRUDER_1)
-	M98 P"/sys/homew.g"
+; Lifter homing skipped – no U/W axes present
+;if exists(global.MODULE_EXTRUDER_0) && exists(global.MODULE_EXTRUDER_1)
+;    M98 P"/sys/homeuw.g"
+;elif exists(global.MODULE_EXTRUDER_0)
+;    M98 P"/sys/homeu.g"
+;elif exists(global.MODULE_EXTRUDER_1)
+;    M98 P"/sys/homew.g"
 M400
 
 ; Clean the homing of XY ------------------------------------------------------

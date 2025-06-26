@@ -55,8 +55,9 @@ if (!var.RESUMING_PRINT)
 		M98 P"/macros/report/warning.g" Y{"The Z endstop is triggered before moving"} F{var.CURRENT_FILE} W35200
 M400
 
-if( !move.axes[3].homed || ( exists(move.axes[4]) && !move.axes[4].homed ) )
-	M98 P"/sys/homeuw.g"
+; U/W lifter homing removed
+;if( !move.axes[3].homed || ( exists(move.axes[4]) && !move.axes[4].homed ) )
+;    M98 P"/sys/homeuw.g"
 M400
 
 ; Check if we are in the endstop for X or Y 
