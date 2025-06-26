@@ -71,7 +71,7 @@ if !exists(global.toolAuxTempIDs)
 set global.toolAuxTempIDs[param.T] = var.AUX_TEMP_SENSOR_ID
 
 ; Heater
-var HEATER_PORT	  		= {var.BOARD_CAN_ID_NAME^".heater"}	; Port used
+var HEATER_PORT	  		= {var.BOARD_CAN_ID_NAME^".out0"}	; Port used
 M98 P"/macros/get_id/heater.g"
 var HEATER_ID 			= global.heaterId	; ID of the Heater
 var HEATER_MAX_TEMP		= 320				; [ºC] Max. temperature allowed in
@@ -94,7 +94,7 @@ var FEEDER_CURRENT		= 1000				; [mA] Current of the motor
 if(!exists(global.toolFanId))
 	global toolFanId = {null,null}	;global variable to store the tool fan ids
 var FAN_TOOL_PORT 		= {var.BOARD_CAN_ID_NAME^".out1"}	; Tool FAN
-var FAN_TOOL_TACH_PORT	= {"+"^var.BOARD_CAN_ID_NAME^".out1.tach"}	; Tool FAN tachometer
+; var FAN_TOOL_TACH_PORT	= {"+"^var.BOARD_CAN_ID_NAME^".out1.tach"}	; Tool FAN tachometer
 M98 P"/macros/get_id/fan.g"
 var FAN_TOOL_ID 		= global.fanId		; ID to use for the tool Fan
 set global.toolFanId[param.T]	= global.fanId
@@ -133,10 +133,10 @@ M308 S{var.AUX_TEMP_SENSOR_ID} P{var.AUX_TEMP_SENSOR_PORT} Y{var.TEMP_SENSOR_TYP
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create the aux. temp. sensor for the extruder" F{var.CURRENT_FILE} E12800
 
 ; Tool FAN with tachometer
-M950 F{var.FAN_TOOL_ID} C{""^var.FAN_TOOL_PORT^var.FAN_TOOL_TACH_PORT} Q400
-M98 P"/macros/assert/result.g" R{result} Y"Unable to create the tool fan" F{var.CURRENT_FILE} E12801
-M106 P{var.FAN_TOOL_ID} S0 H-1 X{var.FAN_TOOL_MAX_PWM} C{var.FAN_TOOL_NAME}		; Limiting the PWM 
-M98 P"/macros/assert/result.g" R{result} Y"Unable to limit the PWM to 12V in the tool fan" F{var.CURRENT_FILE} E12802
+; M950 F{var.FAN_TOOL_ID} C{""^var.FAN_TOOL_PORT^var.FAN_TOOL_TACH_PORT} Q400
+; M98 P"/macros/assert/result.g" R{result} Y"Unable to create the tool fan" F{var.CURRENT_FILE} E12801
+; M106 P{var.FAN_TOOL_ID} S0 H-1 X{var.FAN_TOOL_MAX_PWM} C{var.FAN_TOOL_NAME}		; Limiting the PWM 
+; M98 P"/macros/assert/result.g" R{result} Y"Unable to limit the PWM to 12V in the tool fan" F{var.CURRENT_FILE} E12802
 
 ; Heater
 M950 H{var.HEATER_ID} C{var.HEATER_PORT} T{var.TEMP_SENSOR_ID} Q100

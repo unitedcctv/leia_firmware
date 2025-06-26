@@ -57,7 +57,7 @@ M98 P"/macros/get_id/sensor.g"
 var TEMP_SENSOR_ID 		= global.sensorId	; ID of the emulated temperature Sensor
 
 ; Heater
-var HEATER_PORT	  		= {var.BOARD_CAN_ID_NAME^".heater"}	; Port used
+var HEATER_PORT	  		= {var.BOARD_CAN_ID_NAME^".out0"}	; Port used
 M98 P"/macros/get_id/heater.g"
 var HEATER_ID 			= global.heaterId	; ID of the Heater
 var HEATER_MAX_TEMP		= 320				; [ºC] Max. temperature allowed in
@@ -78,7 +78,7 @@ var FEEDER_CURRENT		= 650				; [mA] Current of the motor
 
 ; Tool FAN with tachometer
 var FAN_TOOL_PORT 		= {var.BOARD_CAN_ID_NAME^".out1"}	; Tool FAN
-var FAN_TOOL_TACH_PORT	= {"+"^var.BOARD_CAN_ID_NAME^".out1.tach"}	; Tool FAN tachometer
+; var FAN_TOOL_TACH_PORT	= {"+"^var.BOARD_CAN_ID_NAME^".out1.tach"}	; Tool FAN tachometer
 M98 P"/macros/get_id/fan.g"
 var FAN_TOOL_ID 		= global.fanId		; ID to use for the tool Fan
 var FAN_TOOL_NAME		= {"tool_t"^param.T}
@@ -107,8 +107,8 @@ M308 S{var.TEMP_SENSOR_ID} P{var.TEMP_SENSOR_PORT} Y{var.TEMP_SENSOR_TYPE} R2200
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create temp. sensor for the extruder" F{var.CURRENT_FILE} E12709
 
 ; Tool FAN with tachometer
-M950 F{var.FAN_TOOL_ID} C{""^var.FAN_TOOL_PORT^var.FAN_TOOL_TACH_PORT} Q200
-M98 P"/macros/assert/result.g" R{result} Y"Unable to create the tool fan" F{var.CURRENT_FILE} E12710
+; M950 F{var.FAN_TOOL_ID} C{""^var.FAN_TOOL_PORT^var.FAN_TOOL_TACH_PORT} Q200
+; M98 P"/macros/assert/result.g" R{result} Y"Unable to create the tool fan" F{var.CURRENT_FILE} E12710
 
 ; Heater
 M950 H{var.HEATER_ID} C{var.HEATER_PORT} T{var.TEMP_SENSOR_ID} Q100

@@ -27,17 +27,17 @@ M98 P"/macros/assert/result.g" R{result} Y{"Unable to create the filament monito
 
 ; Filament monitor sensors: MOVE
 M98 P"/macros/get_id/sensor.g"	
-M308 S{global.sensorId} P{var.BOARD_CAN_ID_NAME^".dummy"} Y"filament" A{"fila_move_t"^param.T^"[mm/s]"} B{var.FILAMENT_MONITOR_SCALE} C0.05 ; Filter enabled
+M308 S{global.sensorId} P"nil" Y"linear-analog" A{"fila_move_t"^param.T^"[mm/s]"} B{var.FILAMENT_MONITOR_SCALE} C0.05 ; Filter enabled
 M98 P"/macros/assert/result.g" R{result} Y{"Unable to define the filament monitor sensor for tool %s"} A{param.T,} F{var.CURRENT_FILE} E12624
 
 ; Filament monitor sensors: ACCUM
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId} P{var.BOARD_CAN_ID_NAME^".dummy"} Y"totfilam" A{"fila_accu_t"^param.T^"[mm]"} B{var.FILAMENT_ACCUMULATED_SCALE}
+M308 S{global.sensorId} P"nil" Y"linear-analog" A{"fila_accu_t"^param.T^"[mm]"} B{var.FILAMENT_ACCUMULATED_SCALE}
 M98 P"/macros/assert/result.g" R{result} Y{"Unable to define the filament monitor accumulated sensor for tool %s"} A{param.T,} F{var.CURRENT_FILE} E12625
 
 ; Filament monitor sensors: RATIO
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId} P{var.BOARD_CAN_ID_NAME^".dummy"} Y"filaratio" A{"fila_rati_t"^param.T^"[%]"} B{var.FILAMENT_RATIO_SCALE} C0.2
+M308 S{global.sensorId} P"nil" Y"linear-analog" A{"fila_rati_t"^param.T^"[%]"} B{var.FILAMENT_RATIO_SCALE} C0.2
 M98 P"/macros/assert/result.g" R{result} Y{"Unable to define the filament monitor ratio sensor for tool %s"} A{param.T,} F{var.CURRENT_FILE} E12626
 
 ; Odometer sensor in both directions 

@@ -261,31 +261,31 @@ M98  P"/macros/assert/result.g" R{result} Y"Unable to configure the endstop for 
 
 ; Sensors ---------------------------------------------------------------------
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId} 	Y"tmcavg" P{""^var.X_MOTOR_DRIVER_F} 	A"load_xf_avg[]" C100.0
+M308 S{global.sensorId}  Y"tmcavg" P{""^var.X_MOTOR_DRIVER_F}  A"load_xf_avg[]" C100.0
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create the load sensor of the X motor board (front)" F{var.CURRENT_FILE} E10587
 
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId} 	Y"tmcavg" P{""^var.X_MOTOR_DRIVER_B} 	A"load_xb_avg[]" C100.0
+M308 S{global.sensorId}  Y"tmcavg" P{""^var.X_MOTOR_DRIVER_B}  A"load_xb_avg[]" C100.0
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create the load sensor of the X motor board (back)" F{var.CURRENT_FILE} E10588
 
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId} 	Y"tmcavg" P{""^var.Y_MOTOR_DRIVER} 		A"load_y_avg[]" C100.0
+M308 S{global.sensorId}  Y"tmcavg" P{""^var.Y_MOTOR_DRIVER}  A"load_y_avg[]" C100.0
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create the load sensor of the Y motor board" F{var.CURRENT_FILE} E10589
 
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId} 	Y"tmcavg" P{""^var.Z_MOTOR_DRIVER_L_F} 	A"load_zlf_avg[]" C100.0
+M308 S{global.sensorId}  Y"tmcavg" P{""^var.Z_MOTOR_DRIVER_L_F}  A"load_zlf_avg[]" C100.0
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create the load sensor of the Z motor board (left, front)" F{var.CURRENT_FILE} E10590
 
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId} 	Y"tmcavg" P{""^var.Z_MOTOR_DRIVER_L_B} 	A"load_zlb_avg[]" C100.0
+M308 S{global.sensorId}  Y"tmcavg" P{""^var.Z_MOTOR_DRIVER_L_B}  A"load_zlb_avg[]" C100.0
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create the load sensor of the Z motor board (left, back)"  F{var.CURRENT_FILE} E10591
 
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId} 	Y"tmcavg" P{""^var.Z_MOTOR_DRIVER_R_F} 	A"load_zrf_avg[]" C100.0
+M308 S{global.sensorId}  Y"tmcavg" P{""^var.Z_MOTOR_DRIVER_R_F}  A"load_zrf_avg[]" C100.0
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create the load sensor of the Z motor board (right, front)" F{var.CURRENT_FILE} E10592
 
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId} 	Y"tmcavg" P{""^var.Z_MOTOR_DRIVER_R_B} 	A"load_zrb_avg[]" C100.0
+M308 S{global.sensorId}  Y"tmcavg" P{""^var.Z_MOTOR_DRIVER_R_B}  A"load_zrb_avg[]" C100.0
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create the load sensor of the Z motor board (right, back)" F{var.CURRENT_FILE} E10593
 
 ; Set segmentation to 5 segments/second

@@ -19,8 +19,7 @@ M98 P"/sys/modules/power_meter/viio/v0/config.g"
 M98 P"/sys/modules/xy_calibration/viio/v0/config.g"
 
 ; Adding the extruder if they are connected -----------------------------------
-M98 P"/macros/extruder/automatic_detection.g" T0
-M98 P"/macros/extruder/automatic_detection.g" T1
+M98 P"/sys/modules/extruders/lgx/v0/config.g" T0
 
 
 ; -----------------------------------------------------------------------------

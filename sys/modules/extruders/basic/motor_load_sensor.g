@@ -17,7 +17,7 @@ var MOTOR_CAN_ID_NAME	= {""^var.BOARD_CAN_ID^".0"} ; As a string
 
 ; Creating the load sensor of the motor in the extruder
 M98 P"/macros/get_id/sensor.g"
-M308 S{global.sensorId} 	Y"tmcavg" P{""^var.MOTOR_CAN_ID_NAME} 	A{"load_t"^param.T^"_avg[]"} C10000.0
+M308 S{global.sensorId} P"nil" Y"linear-analog" A{"load_t"^param.T^"_avg[]"} C10000.0
 M98 P"/macros/assert/result.g" R{result} Y{"Unable to create sensor of the tool %s"} A{param.T,} F{var.CURRENT_FILE} E12633
 
 M118 S{"Configured motor load sensor for tool "^param.T}
