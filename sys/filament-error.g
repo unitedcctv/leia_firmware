@@ -67,14 +67,6 @@ elif(param.P == 2)
 else
 	set global.hmiStateDetail = "error_fila_unknown"
 
-if ((param.P == 4) || (param.P == 3))
-	var CURRENT_TOOL = state.currentTool
-	if (exists(global.MODULE_FHX) && (global.MODULE_FHX[var.CURRENT_TOOL] != null))
-		if (sensors.analog[global.oofFhxSensorID[var.CURRENT_TOOL]].lastReading >= (global.OOF_TRIGG_VALUE))
-			M98 P"/macros/fhx/control/oof_event/pause.g" T{var.CURRENT_TOOL}	; calling pause instead of stopping print
-			M598
-			M118 S{"[filament-error.g] Done " ^var.CURRENT_FILE}
-			M99
 M598
 
 if (param.P > 0)

@@ -71,17 +71,6 @@ if move.axes[2].homed
 	M400
 M400
 
-; calling safety to check for filament jam this may be problematic if anything goes wrong in the safety the pause won´t succeed and will be stuck
-if (exists(global.MODULE_FHX))
-	var CURRENT_TOOL = state.currentTool >= 0 ? state.currentTool : null
-	if (var.CURRENT_TOOL != null && global.MODULE_FHX[var.CURRENT_TOOL] != null)
-		M98 P"/macros/fhx/control/safety/check.g" T{var.CURRENT_TOOL}  
-		M400
-		set global.fhxMotorsRunning = null
-		if (global.fhxCheck = true)
-			set global.fhxCheck = false
-			M98 P"/macros/report/event.g" Y{"Filament path not clear for T%s. Please check path as instructed before resuming."} A{var.CURRENT_TOOL,} F{var.CURRENT_FILE} V33302
-M400
 ; reset heater idle timers
 M98 P"/macros/generic/reset_idle_timer.g"
 ; -----------------------------------------------------------------------------

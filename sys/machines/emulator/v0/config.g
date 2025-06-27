@@ -16,7 +16,6 @@ M98 P"/sys/modules/xy_calibration/viio/v0/config.g"	; XY Calibra.	VIIO	v0
 
 ; Adding the extruder if they are connected -----------------------------------
 M98 P"/sys/modules/extruders/lgx/v0/config.g" T0
-M98 P"/sys/modules/fhx/emulator/config.g"			; FHX			VIIO 	v0
 ; -----------------------------------------------------------------------------
 M118 S{"[CONFIG] Done configuration of EMULATOR V0"}
 M99
