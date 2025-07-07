@@ -75,27 +75,6 @@ M400
 M98 P"/macros/assert/abort_if.g" R{var.errorMoving}  Y{"Unable to move to Zmax"} F{var.CURRENT_FILE} E36510
 M98 P"/macros/assert/abort_if.g" R{!sensors.endstops[2].triggered} Y{"Unable to trigger the Z endstop after retraction"} F{var.CURRENT_FILE} E36511
 
-; This is zmax 
-G92 Z{move.axes[2].max}
-M400
-
-; Let's move down -------------------------------------------------------------
-G90 ; Absolute position
-G1 Z{var.FINAL_POSITION[2]} F{var.MOVEMENT_SPEED}
-M400
-
-; Run System Identification Move ----------------------------------------------
-M98 P"/macros/input_shaping/system_identification.g"
-M400
-
-; Move XY to final positions --------------------------------------------------
-G1 X{var.FINAL_POSITION[0]} Y{var.FINAL_POSITION[1]} F{var.MOVEMENT_SPEED}
-M400
-
-; Recover the extruder --------------------------------------------------------
-if(var.CURRENT_TOOL != -1)
-	T{var.CURRENT_TOOL}
-
 M98 P"/macros/report/event.g" Y"Home Zmax completed" F{var.CURRENT_FILE} V36500
 
 ; -----------------------------------------------------------------------------

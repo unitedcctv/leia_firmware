@@ -49,15 +49,14 @@ if (!var.RESUMING_PRINT)
 
 	if( !sensors.endstops[2].triggered )
 		G91												; Relative position
-		G1 H1 Z{var.Z_LIFT} F{var.SPEED_FAST_MOVE}		; Move Z up
+				; Move Z up – only seek end-stop if Z is not homed yet
+		if (!move.axes[2].homed)
+			G1 H1 Z{var.Z_LIFT} F{var.SPEED_FAST_MOVE} ; seek Z-max for clearance on first XY homing
+		else
+			G1 Z{var.Z_LIFT} F{var.SPEED_FAST_MOVE}   ; already homed → just lift a bit, no end-stop seek
 		M400
 	else
 		M98 P"/macros/report/warning.g" Y{"The Z endstop is triggered before moving"} F{var.CURRENT_FILE} W35200
-M400
-
-; U/W lifter homing removed
-;if( !move.axes[3].homed || ( exists(move.axes[4]) && !move.axes[4].homed ) )
-;    M98 P"/sys/homeuw.g"
 M400
 
 ; Check if we are in the endstop for X or Y 

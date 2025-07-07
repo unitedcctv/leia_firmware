@@ -70,15 +70,15 @@ global inputShapingDamping     	= 0.1											; [] Default damping ratio
 M593 P"ei2" F{global.inputShapingOmega} S{global.inputShapingDamping} 			; Set input shaping
 
 ; Axes Dimensions
-global printingLimitsX = {0 , 1000}	; [mm] Min and max point allowed to print in X
-global printingLimitsY = {0 , 500}	; [mm] Min and max point allowed to print in Y
-global printingLimitsZ = {0 , 500}	; [mm] Min and max point allowed to print in Z
+global printingLimitsX = {0 , 1050}	; [mm] Min and max point allowed to print in X
+global printingLimitsY = {0 , 430}	; [mm] Min and max point allowed to print in Y
+global printingLimitsZ = {0 , 430}	; [mm] Min and max point allowed to print in Z
 
 ; Loading measured length values
 var requiresMeasureLength = 0
-var X_AXIS_LENGTH 		= 1080 	; [mm] Total X-Axis length
-var Y_AXIS_LENGTH 		= 611 	; [mm] Total Y-Axis length
-var Z_AXIS_LENGTH 		= 515 	; [mm] Total Z-Axis length
+var X_AXIS_LENGTH 		= 1050 	; [mm] Total X-Axis length
+var Y_AXIS_LENGTH 		= 430 	; [mm] Total Y-Axis length
+var Z_AXIS_LENGTH 		= 430 	; [mm] Total Z-Axis length
 
 if(var.requiresMeasureLength > 0)
 	M98 P"/macros/report/warning.g" Y{"Requires calibration using measure_length.g"} F{var.CURRENT_FILE} W10530
@@ -175,7 +175,7 @@ M98 P"/macros/assert/result.g" R{result} Y"Unable to map the motor drivers to th
 
 ; Expressions and arrays not supported in 3.4.
 ;M584 Z{var.Z_MOTOR_DRIVER_L_F}:{var.Z_MOTOR_DRIVER_L_B}:{var.Z_MOTOR_DRIVER_R_F}:{var.Z_MOTOR_DRIVER_R_B}	; Set drive mapping for Z
-M584 Z30.0:30.1:31.0:31.1	; Set drive mapping for Z
+M584 Z30.0:30.1:31.1:31.0	; Set drive mapping for Z
 M98 P"/macros/assert/result.g" R{result} Y"Unable to map the motor drivers to the axes Z" F{var.CURRENT_FILE} E10557
 
 ; Microstepping
