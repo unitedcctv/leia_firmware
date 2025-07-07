@@ -8,8 +8,6 @@ var CURRENT_FILE = "/sys/bed.g"
 M118 S{"[BEDMESH] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[state.thisInput].stackDepth}
 
 ; Checking global variables and input parameters ------------------------------
-; Checking for files first
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/probe/bed.g"} F{var.CURRENT_FILE} E30000
 ; Checking global variables
 M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_BED)}  	Y{"Missing module BED"} F{var.CURRENT_FILE}  	E30001
 M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_PROBES)}  	Y{"Missing module PROBES"} F{var.CURRENT_FILE}  E30002
@@ -27,7 +25,7 @@ var MIN_NUM_POINTS_BED_MAP = 2 ;
 var EXISTS_JOBBOX = exists(global.jobBBOX) && global.jobBBOX != null && #global.jobBBOX == 6
 var bedMapPosX = {global.PROBE_START_X, global.printingLimitsX[1]}
 var bedMapPosY = {global.PROBE_START_Y,global.printingLimitsY[1]}
-var spacingBtwMapPoints = {130,84}
+var spacingBtwMapPoints = {100,42}
 
 ; Measurement -----------------------------------------------------------------
 
@@ -67,7 +65,6 @@ if(var.EXISTS_JOBBOX)
 ; setting the probe grid
 M557 X{var.bedMapPosX} Y{var.bedMapPosY} S{var.spacingBtwMapPoints}
 M400
-M98 P"/macros/probe/bed.g" 
 
 ; Process the result
 var MESH_SUCCESS = ( exists(global.bedFile) && global.bedFile != null && global.bedFile != "" )

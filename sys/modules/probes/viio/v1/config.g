@@ -19,7 +19,7 @@ var PROBE_OFFSET_Z    = 5			; [mm] Offset of the probe in Z
 
 global PROBE_OFFSET_Z = var.PROBE_OFFSET_Z		; [mm] Offset of the probe in Z
 global PROBE_START_X = 50		; [mm] First point of the besh mesh in X
-global PROBE_START_Y = 25		; [mm] First point of the besh mesh in Y
+global PROBE_START_Y = 21		; [mm] First point of the besh mesh in Y
 global PROBE_SENSOR_ID = 0    	; ID of the sensor      
 
 M950  S0 C{var.PROBE_CONTROL_PIN}         ; SERVO channel for BLTouch

@@ -78,7 +78,7 @@ global printingLimitsZ = {0 , 430}	; [mm] Min and max point allowed to print in 
 var requiresMeasureLength = 0
 var X_AXIS_LENGTH 		= 1050 	; [mm] Total X-Axis length
 var Y_AXIS_LENGTH 		= 430 	; [mm] Total Y-Axis length
-var Z_AXIS_LENGTH 		= 430 	; [mm] Total Z-Axis length
+var Z_AXIS_LENGTH 		= 422 	; [mm] Total Z-Axis length
 
 if(var.requiresMeasureLength > 0)
 	M98 P"/macros/report/warning.g" Y{"Requires calibration using measure_length.g"} F{var.CURRENT_FILE} W10530
