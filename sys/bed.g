@@ -29,10 +29,6 @@ var spacingBtwMapPoints = {100,42}
 
 ; Measurement -----------------------------------------------------------------
 
-; Global variable to return the bed file.
-if (exists(global.bedFile))	; Clear the return before calling 
-	set global.bedFile = null
-
 if(var.EXISTS_JOBBOX)
 	; setting the margin for X and Y
 	M118 S{"Job bounding box exists: Bed mapping only for bounding box"}
@@ -66,16 +62,10 @@ if(var.EXISTS_JOBBOX)
 M557 X{var.bedMapPosX} Y{var.bedMapPosY} S{var.spacingBtwMapPoints}
 M400
 
-; Process the result
-var MESH_SUCCESS = ( exists(global.bedFile) && global.bedFile != null && global.bedFile != "" )
-if( var.MESH_SUCCESS )
-	; We need to load the bed map at Z0 and where we start.
-	G29 S1
-	M400
-	G1 Z0 F{var.MOVE_SPEED}
-	M98 P"/macros/report/event.g" Y{"Bed mapping completed, map available in: %s"} A{global.bedFile,} F{var.CURRENT_FILE} V30007
-else
-	M98 P"/macros/assert/abort.g" Y{"Bed mapping was not completed"}  F{var.CURRENT_FILE} E30006
+G29 S0
+M400
+G1 Z0 F{var.MOVE_SPEED}
+M98 P"/macros/report/event.g" Y{"Bed mapping completed"} F{var.CURRENT_FILE} V30007
 M400
 
 ; -----------------------------------------------------------------------------

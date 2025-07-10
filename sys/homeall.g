@@ -24,6 +24,7 @@ M98 P"/macros/assert/abort_if.g" R{!exists(state.currentTool)}   Y{"In the OM, s
 var Z_HOMING_FINAL_POS 	= 30					; [mm] Final position in Z
 var MOVEMENT_SPEED 		= 10000					; [mm/min] Movement speed in this file.
 var TIME_REHOMING_TO_Z_MAX = ( 60 * 60 * 24 ) 	; [sec] Max. time without re-homing to Zmax (24 hours)
+var FINAL_POSITION = {500, 220, 30}
 ; we cannot home to zmax if we are in sequential print, because we could crash with a part
 ; Ensure the X-axis printable limit upper bound is initialized to a numeric value
 if (exists(global.printingLimitsX) && (global.printingLimitsX[1] == null))
@@ -67,16 +68,22 @@ G1 H2 Z-400 F6000          ; ignore end-stops, ~100 mm s-¹
 G90                        ; back to absolute coords
 
 ; Slow finish – probe down slowly until BLTouch triggers
+;M208: Set axis max travel
+;Parameters
+;Snnn 0 = set axis maximum (default), 1 = set axis minimum
+;Xnnn X axis limit
+;Ynnn Y axis limit
+;Znnn Z axis limit
 M208 Z-650 S1
 G30 S-1                    ; single probe, do not set Z, stops when probe triggers
 
 ; Record how far we are below the switch
-var travel = -move.axes[2].machinePosition   ; positive number
+var travel = -1 * move.axes[2].machinePosition   ; positive number
 echo "Total Z travel = "^{var.travel,2}," mm"
 
 ; Update soft limits so bed is Z-MIN = 0, switch is Z-MAX = travel  
-M208 Z0 S1                 ; set new MIN at 0 (the bed)  :contentReference[oaicite:1]{index=1}
 M208 Z{var.travel} S0      ; set new MAX at measured travel  :contentReference[oaicite:2]{index=2}
+M208 Z0 S1                 ; set new MIN at 0 (the bed)  :contentReference[oaicite:1]{index=1}
 
 ; Re-zero (already at the bed) and tidy up
 G92 Z0                     ; current spot *is* Z 0 from now on

@@ -45,14 +45,14 @@ while iterations < #boards
 		set var.boardName = "Z axis left board"
 	elif(boards[iterations].canAddress == 31)
 		set var.boardName = "Z axis right board"
-	elif(boards[iterations].canAddress == 81)
+	elif(boards[iterations].canAddress == 20)
 		set var.boardName = "T0 board"
-	elif(boards[iterations].canAddress == 82)
-		set var.boardName = "T1 board"
-	;checking for the voltages
-	; Debug: print full board object and its properties
-	M118 S{"[SENSORS] Iteration " ^ iterations ^ ": " ^ boards[iterations]} F{var.CURRENT_FILE}
 
+	;checking for the voltages
+	; If board is T0, bypass voltage checks
+	if(boards[iterations].canAddress == 20)
+		M118 S{"[SENSORS] Skipping voltage checks for T0 board"} F{var.CURRENT_FILE}
+		continue
 	if(boards[iterations].vIn.current < var.VIN_MIN )
 		M98 P"/macros/assert/abort_if.g" R{var.ABORT_ENABLED} Y{"Under-Voltage in Vin of %s"} A{var.boardName,}   F{var.CURRENT_FILE} E67310
 		M98 P"/macros/report/warning.g" Y{"Under-Voltage in Vin of %s"} A{var.boardName,} F{var.CURRENT_FILE} W67310

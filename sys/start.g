@@ -23,7 +23,6 @@ set global.hmiStateDetail = "job_starting"
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/files/logs/new.g"}	 	F{var.CURRENT_FILE} E34200
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/sensors/read_power.g"}	F{var.CURRENT_FILE} E34201
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/printing/get_ready.g"}	F{var.CURRENT_FILE} E34202
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/extruder/filament_monitor/reset_accumulated.g"} F{var.CURRENT_FILE} E34206
 
 ; Definitions -----------------------------------------------------------------
 var START_TIME = {+state.time} ; Saving the time in epoch
@@ -70,18 +69,6 @@ M107
 ; Setting the machine is print state ------------------------------------------
 M118 S{"[start.g] Getting the machine ready"}
 M98 P"/macros/printing/get_ready.g"
-
-; Reseting the filament encoder values ------------------------------------------
-if(exists(global.MODULE_EXTRUDER_0))
-	M98 P"/macros/extruder/filament_monitor/reset_accumulated.g" T0
-if(exists(global.MODULE_EXTRUDER_1))
-	M98 P"/macros/extruder/filament_monitor/reset_accumulated.g" T1
-
-; Storing the touch calibrations at start
-if (exists(global.touchBedJobstartValues))
-	set global.touchBedJobstartValues = global.touchBedCalibrations
-else
-	global touchBedJobstartValues = global.touchBedCalibrations
 
 
 M118 S{"[start.g] Running with file: "^job.file.fileName}
