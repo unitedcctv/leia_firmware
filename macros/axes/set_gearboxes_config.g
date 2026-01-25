@@ -12,7 +12,7 @@ var CURRENT_FILE = "/macros/axes/set_gearbox_config.g"
 M118 S{"[set_gearbox_config.g] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[state.thisInput].stackDepth}
 
 ; Create the flag file saving installation time
-echo >"/sys/modules/axes/viio/v2/_gearboxes_installed.txt" state.time
+echo >"/sys/modules/axes/_gearboxes_installed.txt" state.time
 ; Block homing for safety
 set global.errorRestartRequired = true
 

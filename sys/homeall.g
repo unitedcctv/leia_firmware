@@ -58,37 +58,6 @@ else
 	set global.homedToZmax = state.time
 M400
 
-; get z min ----------------------------------------------------------------
-; Get the probe ready
-M401                       ; deploy BLTouch
-
-; Fast plunge straight down 500 mm
-G91                        ; relative moves
-G1 H2 Z-400 F6000          ; ignore end-stops, ~100 mm s-¹
-G90                        ; back to absolute coords
-
-; Slow finish – probe down slowly until BLTouch triggers
-;M208: Set axis max travel
-;Parameters
-;Snnn 0 = set axis maximum (default), 1 = set axis minimum
-;Xnnn X axis limit
-;Ynnn Y axis limit
-;Znnn Z axis limit
-M208 Z-650 S1
-G30 S-1                    ; single probe, do not set Z, stops when probe triggers
-
-; Record how far we are below the switch
-var travel = -1 * move.axes[2].machinePosition   ; positive number
-echo "Total Z travel = "^{var.travel,2}," mm"
-
-; Update soft limits so bed is Z-MIN = 0, switch is Z-MAX = travel  
-M208 Z{var.travel} S0      ; set new MAX at measured travel  :contentReference[oaicite:2]{index=2}
-M208 Z0 S1                 ; set new MIN at 0 (the bed)  :contentReference[oaicite:1]{index=1}
-
-; Re-zero (already at the bed) and tidy up
-G92 Z0                     ; current spot *is* Z 0 from now on
-M402                       ; retract BLTouch
-
 ; Move XY to final positions --------------------------------------------------
 G1 X{var.FINAL_POSITION[0]} Y{var.FINAL_POSITION[1]} F{var.MOVEMENT_SPEED}
 M400

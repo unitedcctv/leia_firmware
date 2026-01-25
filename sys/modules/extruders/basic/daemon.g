@@ -51,10 +51,10 @@ while true
 
 	; --------------------------------------------------------------------------------
 	;Tool positioning check
-	if(var.IS_PRINTING && global.toolPositioningFailed[var.TOOL])
-		M98 P"/macros/report/warning.g" Y{"T%s positioning failed. Run lifter test. Pausing.."} A{var.TOOL,var.touchSensDiff} F{var.CURRENT_FILE} W12686
-		set global.hmiStateDetail = "error_obstacle"
-		M25
+	;if(var.IS_PRINTING && global.toolPositioningFailed[var.TOOL])
+	;	M98 P"/macros/report/warning.g" Y{"T%s positioning failed. Run lifter test. Pausing.."} A{var.TOOL,var.touchSensDiff} F{var.CURRENT_FILE} W12686
+	;	set global.hmiStateDetail = "error_obstacle"
+	;	M25
 	; --------------------------------------------------------------------------------
 
 	; --------------------------------------------------------------------------------

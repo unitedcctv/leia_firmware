@@ -14,7 +14,7 @@
 ;					If it is not present, it will support all the input
 ;					parameters but the result file may be too long.
 ; Example:
-;	M98 P"/macros/files/link/create.g" L"/macros/lights/set.g"	D"/sys/modules/cbc/viio/v0/set.g" I{"D",}
+;	M98 P"/macros/files/link/create.g" L"/macros/lights/set.g"	D"/sys/modules/cbc/set.g" I{"D",}
 ;------------------------------------------------------------------------------
 var CURRENT_FILE = "/macros/files/link/create.g"
 

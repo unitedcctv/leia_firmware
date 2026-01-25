@@ -33,9 +33,9 @@ var TURN_OFF_TEMP = -273.1
 var MIN_TEMP = 0
 var FAST_XY_SPEED = 12000
 ; Home UW if needed ---------------------------------------------------------
-if global.toolPositioningFailed[0] || global.toolPositioningFailed[1]
-	M98 P"homeuw.g"
-M400
+;if global.toolPositioningFailed[0] || global.toolPositioningFailed[1]
+;	M98 P"homeuw.g"
+;	M400
 
 ; Homing XY if needed ---------------------------------------------------------
 var NEEDS_HOMING_XY = !move.axes[0].homed || !move.axes[1].homed

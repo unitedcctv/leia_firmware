@@ -24,6 +24,6 @@ M586 P1 S1				; enable FTP
 global hmiStateDetail = "board_unconfigured"
 
 ; Start machine configuration -------------------------------------------------
-M98 P"/sys/machines/config.g"
+M98 P"/sys/modules/config.g"
 
 M99 ; Done

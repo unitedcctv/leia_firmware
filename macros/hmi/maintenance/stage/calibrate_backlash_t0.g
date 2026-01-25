@@ -5,7 +5,7 @@
 var CURRENT_FILE 	= "/macros/hmi/maintenance/stage/calibrate_backlash_t0.g"
 M118 S{"[calibrate_backlash_t0.g] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[state.thisInput].stackDepth}
 ; Check the files
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/stage/viio/v2/calibrate_backlash.g"} F{var.CURRENT_FILE} E89020
+M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/stage/calibrate_backlash.g"} F{var.CURRENT_FILE} E89020
 
 ; lock the door----------------------------------------------------------------
 M98 P"/macros/doors/lock.g"
@@ -16,7 +16,7 @@ if (!var.AXES_HOMED)
 	G28
 M400
 ; call the test macro
-M98 P"/sys/modules/stage/viio/v2/calibrate_backlash.g" T0
+M98 P"/sys/modules/stage/calibrate_backlash.g" T0
 M400
 
 

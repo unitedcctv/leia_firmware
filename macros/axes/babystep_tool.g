@@ -85,7 +85,7 @@ var BOARD_INDEX = {( network.name != "EMULATOR" ) ? global.boardIndexInOM : 0 }
 var BOARD_UUID  = boards[var.BOARD_INDEX].uniqueId	; Getting the Unique ID
 ; Getting the last offset value
 ; (!) WARNING: The names here listed need to match the names in the files:
-;	- /sys/modules/stage/viio/v2/detect_bed_touch.g
+;	- /sys/modules/stage/detect_bed_touch.g
 var NEW_OFFSET 			= var.TARGET_MIN_AXIS_POSITION ; [mm] axis printing position
 
 

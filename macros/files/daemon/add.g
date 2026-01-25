@@ -3,7 +3,7 @@
 ; Input parameters:
 ;	- F: Path to the file to be added.
 ; Example:
-;	M98 P"/macros/files/daemon/add.g" F"/sys/modules/cbc/viio/v0/control.g"
+;	M98 P"/macros/files/daemon/add.g" F"/sys/modules/cbc/control.g"
 ;------------------------------------------------------------------------------
 var CURRENT_FILE = "/macros/files/daemon/add.g"
 M118 S{"[DAEMON] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[state.thisInput].stackDepth}

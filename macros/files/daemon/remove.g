@@ -3,7 +3,7 @@
 ; Input parameters:
 ;	- F: Path to the file to be removed.
 ; Example:
-;	M98 P"/macros/files/daemon/remove.g" F"/sys/modules/cbc/viio/v0/control.g"
+;	M98 P"/macros/files/daemon/remove.g" F"/sys/modules/cbc/control.g"
 ;------------------------------------------------------------------------------
 var CURRENT_FILE = "/macros/files/daemon/add.g"
 
