@@ -5,7 +5,7 @@
 ;	- X: Offset in X
 ;	- Y: Offset in Y
 ;------------------------------------------------------------------------------
-var CURRENT_FILE = "/sys/modules/extruders/basic/set_offset.g"
+var CURRENT_FILE = "/sys/modules/extruders/basic_set_offset.g"
 M118 S{"Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[state.thisInput].stackDepth}
 ; Checking global variables and input parameters ------------------------------
 ; Checking global variables

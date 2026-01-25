@@ -4,7 +4,7 @@
 ;   After 20 minutes if the machine is idle and extruders are hot it automatically
 ;	turns off the extruders.
 ;---------------------------------------------------------------------------------------------
-var CURRENT_FILE		= "/sys/modules/extruders/basic/daemon.g"
+var CURRENT_FILE		= "/sys/modules/extruders/basic_daemon.g"
 ; Definitions--------------------------------------------------------------------
 var OPEN_CIRCUIT_TEMP	= 2000		;[°C]
 var TURN_OFF_TEMP		= -273.1	;[°C]

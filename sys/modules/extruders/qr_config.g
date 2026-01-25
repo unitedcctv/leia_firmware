@@ -21,9 +21,9 @@ M118 S{"[CONFIG] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[
 
 ; Checking global variables and input parameters ------------------------------
 ; Checking for files first
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic/set_offset.g"} F{var.CURRENT_FILE} E12790
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic/duet_filament_monitor.g"} F{var.CURRENT_FILE} E12791
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic/motor_load_sensor.g"} F{var.CURRENT_FILE} E12792
+M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_set_offset.g"} F{var.CURRENT_FILE} E12790
+M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_duet_filament_monitor.g"} F{var.CURRENT_FILE} E12791
+M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_motor_load_sensor.g"} F{var.CURRENT_FILE} E12792
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/extruder/nozzle/load.g"} F{var.CURRENT_FILE} E12813
 ; Checking global variables
 M98 P"/macros/assert/abort_if.g" R{!exists(param.T)}  Y{"Missing required input parameter T"} F{var.CURRENT_FILE} E12793
@@ -173,13 +173,13 @@ M563 P{param.T} D{global.extruderDriverId} H{var.HEATER_ID} F{var.FAN_TOOL_ID} S
 M98 P"/macros/assert/result.g" R{result} Y{"Unable to define the tool "^param.T} F{var.CURRENT_FILE} E12812
 
 ; Tool position
-M98 P"/sys/modules/extruders/basic/set_offset.g" T{param.T} X{var.OFFSET_X_DEFAULT[param.T]}  Y{var.OFFSET_Y_DEFAULT[param.T]}
+M98 P"/sys/modules/extruders/basic_set_offset.g" T{param.T} X{var.OFFSET_X_DEFAULT[param.T]}  Y{var.OFFSET_Y_DEFAULT[param.T]}
 
 ; Filament monitor
-M98 P"/sys/modules/extruders/basic/duet_filament_monitor.g" T{param.T}
+M98 P"/sys/modules/extruders/basic_duet_filament_monitor.g" T{param.T}
 
 ; Motor load
-M98 P"/sys/modules/extruders/basic/motor_load_sensor.g" T{param.T}
+M98 P"/sys/modules/extruders/basic_motor_load_sensor.g" T{param.T}
 
 ; Analog OOF & Retraction Module Hallsensor
 M98 P"/sys/modules/extruders/oof_config.g" T{param.T}
@@ -197,11 +197,11 @@ M400
 ; Configuring the global variable related to the tools
 if( param.T == 0 )
 	global MODULE_EXTRUDER_0 = 0.1	; Setting the current version of this module
-	M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic/daemon.g"
+	M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic_daemon.g"
 else
 	global MODULE_EXTRUDER_1 = 0.1	; Setting the current version of this module
 	if(!exists(global.MODULE_EXTRUDER_0))
-		M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic/daemon.g"
+		M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic_daemon.g"
 
 M118 S{"Configured tool "^param.T}
 ; -----------------------------------------------------------------------------

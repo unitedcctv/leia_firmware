@@ -3,7 +3,7 @@
 ; Input Parameters:
 ;	- T: Tool 0 or 1 where the filament monitor is connected
 ;---------------------------------------------------------------------------------------------
-var CURRENT_FILE = "/sys/modules/extruders/basic/motor_load_sensor.g"
+var CURRENT_FILE = "/sys/modules/extruders/basic_motor_load_sensor.g"
 
 ; Checking global variables and input parameters ------------------------------
 ; Checking global variables

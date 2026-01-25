@@ -3,7 +3,7 @@
 ; Input Parameters:
 ;	- T: Tool 0 or 1 where the filament monitor is connected
 ;---------------------------------------------------------------------------------------------
-var CURRENT_FILE = "/sys/modules/extruders/basic/duet_filament_monitor.g"
+var CURRENT_FILE = "/sys/modules/extruders/basic_duet_filament_monitor.g"
 
 ; Checking global variables and input parameters ------------------------------
 ; Checking global variables

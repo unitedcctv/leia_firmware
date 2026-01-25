@@ -46,10 +46,10 @@ var OFFSET_X_DEFAULT 	= {-8.35,-8.35}		; [mm] Default offset in X for T0 and T1
 var OFFSET_Y_DEFAULT 	= {-48.9, 47.1}		; [mm] Default offset in Y for T0 and T1
 ; Set the default tool offsets before xy calib
 if var.inUseT0
-	M98 P"/sys/modules/extruders/basic/set_offset.g" T0 X{var.OFFSET_X_DEFAULT[0]} Y{var.OFFSET_Y_DEFAULT[0]}
+	M98 P"/sys/modules/extruders/basic_set_offset.g" T0 X{var.OFFSET_X_DEFAULT[0]} Y{var.OFFSET_Y_DEFAULT[0]}
 M400
 if var.inUseT1
-	M98 P"/sys/modules/extruders/basic/set_offset.g" T1 X{var.OFFSET_X_DEFAULT[1]} Y{var.OFFSET_Y_DEFAULT[1]}
+	M98 P"/sys/modules/extruders/basic_set_offset.g" T1 X{var.OFFSET_X_DEFAULT[1]} Y{var.OFFSET_Y_DEFAULT[1]}
 M400
 
 var LINE_LENGTH = 20 													; length of the calibration line

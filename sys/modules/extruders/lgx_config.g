@@ -1,7 +1,7 @@
 ; Description: 	
 ;	This is a basic extruder that can be used as a reference to create other extruders.
 ;	It contains:
-;		+ 1 x PT1000 temperature sensor
+;		+ 1 x Slice Engineering 300°C Thermistor
 ;		+ 1 x 650mA Feeder Motor
 ;		+ 1 x Heater
 ;		+ 2 x Fans:
@@ -17,9 +17,9 @@ M118 S{"[CONFIG] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[
 
 ; Checking global variables and input parameters ------------------------------
 ; Checking for files first
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic/set_offset.g"} F{var.CURRENT_FILE} E12700
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic/duet_filament_monitor.g"} F{var.CURRENT_FILE} E12701
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic/motor_load_sensor.g"} F{var.CURRENT_FILE} E12702
+M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_set_offset.g"} F{var.CURRENT_FILE} E12700
+M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_duet_filament_monitor.g"} F{var.CURRENT_FILE} E12701
+M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_motor_load_sensor.g"} F{var.CURRENT_FILE} E12702
 ; Checking global variables
 M98 P"/macros/assert/abort_if.g" R{!exists(param.T)}  Y{"Missing required input parameter T"} F{var.CURRENT_FILE} E12703
 M98 P"/macros/assert/abort_if_null.g" R{param.T}  	  Y{"Input parameter T is null"} F{var.CURRENT_FILE} E12704
@@ -52,7 +52,7 @@ var TOOL_NAME			= "LGX-Extruder"
 
 ; Temperature sensor of the heater
 var TEMP_SENSOR_PORT	= {var.BOARD_CAN_ID_NAME^".temp0"}	; Port
-var TEMP_SENSOR_TYPE	= "pt1000"
+var TEMP_SENSOR_TYPE	= "thermistor"
 M98 P"/macros/get_id/sensor.g"	
 var TEMP_SENSOR_ID 		= global.sensorId	; ID of the emulated temperature Sensor
 
@@ -103,7 +103,7 @@ else
 M98 P"/macros/assert/board_present.g" D{var.BOARD_CAN_ID} Y{"Missing %s"} A{var.boardName,} F{var.CURRENT_FILE} E12708
 
 ; Temperature sensor of the heater
-M308 S{var.TEMP_SENSOR_ID} P{var.TEMP_SENSOR_PORT} Y{var.TEMP_SENSOR_TYPE} R2200 A{"temp_t"^param.T^"[°C]"}  ; Emulated temp. sensor
+M308 S{var.TEMP_SENSOR_ID} P{var.TEMP_SENSOR_PORT} Y{var.TEMP_SENSOR_TYPE} B4267 C0 R500000 A{"temp_t"^param.T^"[°C]"}  ; Slice Engineering 300°C thermistor
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create temp. sensor for the extruder" F{var.CURRENT_FILE} E12709
 
 ; Tool FAN with tachometer
@@ -135,24 +135,24 @@ M563 P{param.T} D{global.extruderDriverId} H{var.HEATER_ID} F{var.FAN_TOOL_ID} S
 M98 P"/macros/assert/result.g" R{result} Y{"Unable to define the tool "^param.T} F{var.CURRENT_FILE} E12717
 
 ; Tool position
-M98 P"/sys/modules/extruders/basic/set_offset.g" T{param.T} X{var.OFFSET_X_DEFAULT[param.T]}  Y{var.OFFSET_Y_DEFAULT[param.T]}
+M98 P"/sys/modules/extruders/basic_set_offset.g" T{param.T} X{var.OFFSET_X_DEFAULT[param.T]}  Y{var.OFFSET_Y_DEFAULT[param.T]}
 
 ; Filament monitor
-M98 P"/sys/modules/extruders/basic/duet_filament_monitor.g" T{param.T}
+M98 P"/sys/modules/extruders/basic_duet_filament_monitor.g" T{param.T}
 
 ; Motor load
-M98 P"/sys/modules/extruders/basic/motor_load_sensor.g" T{param.T}
+M98 P"/sys/modules/extruders/basic_motor_load_sensor.g" T{param.T}
 
 ; LED strip feature removed
 
 ; Configuring teh global variable relate to the tools
 if( param.T == 0 )
 	global MODULE_EXTRUDER_0 = 0.1	; Setting the current version of this module	
-	M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic/daemon.g"
+	M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic_daemon.g"
 else
 	global MODULE_EXTRUDER_1 = 0.1	; Setting the current version of this module	
-	if(!fileexists("/sys/modules/extruders/basic/daemon.g"))
-		M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic/daemon.g"
+	if(!fileexists("/sys/modules/extruders/basic_daemon.g"))
+		M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic_daemon.g"
 
 M118 S{"Configured tool "^param.T}
 
