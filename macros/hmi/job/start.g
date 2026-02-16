@@ -18,11 +18,6 @@
 ;   - O (optional): job bounding rectangle location and dimensions as vector6. {MINX,MINY,MINZ,MAXX,MAXY,MAXYZ}
 ;                   used for probing and bed mapping. will be saved as global.jobBBOX
 ;                   same format as cura output to be consistent.
-;	- C (optional): Flag to activate the extruder relay, if it is 1 extruder relay is activated, 
-;					0 is default.
-;					(Note!) can only be enabled if the print is not 
-;					dual extrusion and the other extruder exists and 
-;					the same material is loaded on the unused extruder(also mandatory xy calibration is needed)
 ;	- A (optional): Flag to activate the autoplacement of the print object.(will be far right of the print bed)
 ;					if it is 1 the autoplacement is active. Default is 0
 ;	- S (optional): Parameter to shift the part in the print bed. It is an array {Xoffset, Yoffset}
@@ -50,7 +45,6 @@ M98 P"/macros/assert/abort_if_file_missing.g" R{param.J} F{var.CURRENT_FILE} E86
 M98 P"/macros/assert/abort_if.g" R{(exists(param.B) && (param.B > 1))}    Y{"Invalid value for the param.B "}    F{var.CURRENT_FILE} E86410
 M98 P"/macros/assert/abort_if.g" R{(exists(param.T) && (param.T > 1))}    Y{"Invalid value for the param.T "}    F{var.CURRENT_FILE} E86411
 M98 P"/macros/assert/abort_if.g" R{(exists(param.O) && (#param.O != 6))}    Y{"param.O must be {MINX,MINY,MINZ,MAXX,MAXY,MAXYZ}"}    F{var.CURRENT_FILE} E86412
-M98 P"/macros/assert/abort_if.g" R{(exists(param.C) && (param.C > 1))}    Y{"Invalid value for the param.C "}    F{var.CURRENT_FILE} E86413
 M98 P"/macros/assert/abort_if.g" R{(exists(param.S) && (#param.S != 2))}    Y{"param.S must be {X_offset,Y_offset}"}    F{var.CURRENT_FILE} E86414
 M98 P"/macros/assert/abort_if.g" R{(exists(param.A) && (param.A > 1))}    Y{"Invalid value for the param.A "}    F{var.CURRENT_FILE} E86415
 M98 P"/macros/assert/abort_if.g" R{(exists(param.X) && (param.X < 0 || param.X > 1))}    Y{"Invalid value for the param.X "}    F{var.CURRENT_FILE} E86416
@@ -149,17 +143,6 @@ else
 
 if(exists(param.Q) && (param.Q == 0))
 	set global.omitXYCalibration = true
-; Extruder Relay ----------------------------------------------------------------
-if(exists(global.activateExtruderRelay))
-	set global.activateExtruderRelay = false
-else
-	global activateExtruderRelay = false
-
-if(exists(param.C) && (param.C == 1))
-	M98 P"/macros/extruder/relay/prerequisite.g"
-	M400
-	M98 P"/macros/assert/abort_if.g" R{(!global.activateExtruderRelay)} Y{"Activating Extruder Relay failed: Check warning messages and restart print"}    F{var.CURRENT_FILE} E86402
-M598
 ; Let's start the print ---------------------------------------------------------
 M32 {param.J}	;Select the job file and Start the SD print
 M400

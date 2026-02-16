@@ -65,9 +65,6 @@ if exists(global.activatePrintAreaManagement) && global.activatePrintAreaManagem
 		if(exists(global.printingLimitsX))
 			set global.printingLimitsX[1] = var.NEXT_X_MAX_LIMIT > 0 ? var.NEXT_X_MAX_LIMIT : 0
 
-; revert the extruder relay status
-if(exists(global.activateExtruderRelay))
-	set global.activateExtruderRelay = false
 ; set back the autoplacement active to false if exists
 if(exists(global.autoPlacementActive))
 	set global.autoPlacementActive = false

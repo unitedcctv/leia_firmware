@@ -39,11 +39,6 @@ if var.NEEDS_HOMING_XY
 	M98 P"homexy.g"
 M400
 
-; turning off the idle tool if we are using relay
-if(exists(global.activateExtruderRelay) && global.activateExtruderRelay)
-	var idleTool = (global.lastPrintingTool == 0) ? 1 : 0
-	M568 P{var.idleTool} S{var.MIN_TEMP} R{var.MIN_TEMP} A2
-	M568 P{var.idleTool} S{var.TURN_OFF_TEMP} R{var.TURN_OFF_TEMP} A2
 M116
 T{global.lastPrintingTool}
 M400

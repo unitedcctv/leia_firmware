@@ -143,8 +143,6 @@ M98 P"/sys/modules/extruders/basic_duet_filament_monitor.g" T{param.T}
 ; Motor load
 M98 P"/sys/modules/extruders/basic_motor_load_sensor.g" T{param.T}
 
-; LED strip feature removed
-
 ; Configuring teh global variable relate to the tools
 if( param.T == 0 )
 	global MODULE_EXTRUDER_0 = 0.1	; Setting the current version of this module	

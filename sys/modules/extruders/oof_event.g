@@ -22,7 +22,6 @@ M98 P"/macros/assert/abort_if.g" R{(param.T>=2||param.T<0)}  Y{"Unexpected tool 
 
 ; Reading the OOF input 
 var NO_FILAMENT = (sensors.gpIn[global.OOF_INPUTS_ID[param.T]].value == 0)
-var ACTIVATE_EXTRUDER_RELAY = (exists(global.activateExtruderRelay) && global.activateExtruderRelay == true)
 if(exists(global.oofMonitoringActive) && !global.oofMonitoringActive)
 	M99
 if(var.NO_FILAMENT)
@@ -39,8 +38,6 @@ if(var.NO_FILAMENT)
 			M568 P{param.T} S{var.OFF_TEMP} R{var.OFF_TEMP} A0 ;Setting extruder temp to off temp [SAFETY]
 			M98 P"/macros/assert/result.g" R{result} Y"Unable to set the target temperature for the extruder in off state" F{var.CURRENT_FILE} E12836
 			M118 S{"[SAFETY] Turned off the extruder"}
-			if(var.ACTIVATE_EXTRUDER_RELAY)
-				M98 P"/macros/extruder/relay/switch_now.g"
 			M598	
 	else
 		M98 P"/macros/report/event.g" Y{"No filament detected in T%s"} A{param.T,} 	F{var.CURRENT_FILE} V12827

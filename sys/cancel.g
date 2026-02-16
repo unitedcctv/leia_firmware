@@ -79,9 +79,6 @@ if var.nextPrintingLimitX
 ; Reverting the status of the auto placement flag
 if(exists(global.autoPlacementActive))
 	set global.autoPlacementActive = false
-; Reverting the extruder relay status
-if(exists(global.activateExtruderRelay))
-	set global.activateExtruderRelay = false
 ; clear the override extruder number
 if(exists(global.overrideExtruderNum))
 	set global.overrideExtruderNum = null

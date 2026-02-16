@@ -184,8 +184,6 @@ M98 P"/sys/modules/extruders/basic_motor_load_sensor.g" T{param.T}
 ; Analog OOF & Retraction Module Hallsensor
 M98 P"/sys/modules/extruders/oof_config.g" T{param.T}
 
-; LED strip feature removed
-
 ; Load flow rate if exists
 M98 P"/macros/extruder/flow_rate/load.g"
 

@@ -66,15 +66,7 @@ if(exists(global.flowRateMultipliers) && (global.flowRateMultipliers[param.T] !=
 M83
 M98 P"/macros/report/event.g" Y{"Starting extrude %smm with %smm/s"} A{param.E,param.F} F{var.CURRENT_FILE} V84000
 
-; set motor state
-if exists(global.fhxMotorsRunning)
-	set global.fhxMotorsRunning = 1
-M400
-
 G1 E{var.calculatedExtrLength} F{var.FEEDRATE_MM_MIN}
-
-if exists(global.fhxMotorsRunning)
-	set global.fhxMotorsRunning = null
 M400
 
 M98 P"/macros/assert/result.g" R{result} Y"Unable to extrude" F{var.CURRENT_FILE} E84016
