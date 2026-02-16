@@ -14,7 +14,7 @@ M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_PROBES)}  	Y{"Missing m
 M98 P"/macros/assert/abort_if.g" R{(!exists(heat.bedHeaters[0]))} 	Y{"No bed heater defined"} F{var.CURRENT_FILE} 	E30003
 
 ; Checking ig it is homed
-var NOT_HOMED = ( !move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed || (exists(move.axes[3].homed) && !move.axes[3].homed) || (exists(move.axes[4].homed) && !move.axes[4].homed) )
+var NOT_HOMED = ( !move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed )
 M98 P"/macros/assert/abort_if.g" R{var.NOT_HOMED}  Y{"Home required before running bed mesh"} F{var.CURRENT_FILE} 	E30004
 
 ; Definitions  ----------------------------------------------------------------

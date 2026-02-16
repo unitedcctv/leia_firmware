@@ -41,11 +41,6 @@ var Z_POSITION_PROBE_START  = 0				; [mm] Where to start probing with the probe 
 var NUM_PROBES				= (exists(param.B) && param.B != null) ? param.B : 3 ; How often to probe before doing nozzle touch detection
 var PROBE_REPEAT_DISTANCE 	= 5 ; [mm] Distance to move between probe attempts
 var PROBE_OFFSET_THRESHOLD  = 0.2 ; [mm] Threshold to successfully probe before doing nozzle touch detection. If outside, there might be some dirt on the bed
-var WIPE					= (exists(param.W) && param.W == 0) ? false : true ; Whether to wipe the nozzle before the touch detection
-
-; only wipe if wanted and wiper is activated
-set var.WIPE = var.WIPE && exists(global.wiperPresent) && global.wiperPresent
-
 var UW_VALID_PRINT_POS = global.TOUCH_BED_VALID_RANGE ; {minimum_allowed_value , maximum_allowed_value}
 
 var INCLUDE_HEADERS			= (exists(param.H) && param.H == 1) ? 1 : 0 ; Whether to include headers in the CSV file
@@ -140,14 +135,7 @@ M400
 var Z_POS_TOUCH_START = var.LINEAR_SENSOR_INSTALLED ? var.Z_POSITION_TOUCH_START_LINEAR : var.Z_POSITION_TOUCH_START_HALL
 G1 Z{var.Z_POS_TOUCH_START} F{var.FAST_MOVE_SPEED}
 
-; optional wipe if wiper is installed
-if(var.WIPE)
-	var PARK_Y = var.TOOL == 0 ? move.axes[1].min : move.axes[1].max
-	G1 X0 Y{var.PARK_Y} F{var.FAST_MOVE_SPEED}
-	M116 P{var.TOOL} S5; wait for the tool to reach temperature
-	M98 P"/macros/nozzle_cleaner/wipe.g" T{var.TOOL} F0
-else
-	M116 P{var.TOOL} S5; wait for the tool to reach temperature
+M116 P{var.TOOL} S5; wait for the tool to reach temperature
 M400
 
 ; --------------------------------------------------------------------------------------------

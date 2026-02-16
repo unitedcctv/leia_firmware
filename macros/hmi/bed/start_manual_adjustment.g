@@ -25,7 +25,7 @@ M98 P"/macros/doors/lock.g"
 ; Deselecting the current tool
 T-1
 M400
-var NOT_HOMED = ( !move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed || (exists(move.axes[3].homed) && !move.axes[3].homed) || (exists(move.axes[4].homed) && !move.axes[4].homed) )
+var NOT_HOMED = ( !move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed )
 if(var.NOT_HOMED)
 	M118 S"[start_manual_adjustment.g] Homing all first"
 	G28

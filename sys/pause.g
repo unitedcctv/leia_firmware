@@ -44,11 +44,6 @@ if(!exists(global.pausedPrintWarmUp))
 else 
 	set global.pausedPrintWarmUp = job.warmUpDuration
 
-; checking if the pause is called from the wipe macro-------------------------
-if(exists(global.manualWipe) && global.manualWipe)
-	G54
-	M118 S{"[pause.g] Pausing for wiping"}
-	M99
 ; Move to the safe park position ----------------------------------------------
 G29 S2 ;disable bed map
 M400

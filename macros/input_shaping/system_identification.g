@@ -9,7 +9,7 @@ var CURRENT_FILE = "/macros/input_shaping/system_identification.g"
 M118 S{"[system_identification.g] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[state.thisInput].stackDepth}
 
 ; Check machine conditions
-var IS_NOT_HOMED = (!move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed || (exists(move.axes[3].homed) && !move.axes[3].homed) || (exists(move.axes[4].homed) && !move.axes[4].homed) )
+var IS_NOT_HOMED = (!move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed )
 M98 P"/macros/assert/abort_if.g" R{var.IS_NOT_HOMED}  Y{"Home required before running system identification"}  F{var.CURRENT_FILE} E88100
 
 ; Definitions

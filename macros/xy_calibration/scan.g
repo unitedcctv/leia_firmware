@@ -22,7 +22,7 @@ M98 P"/macros/assert/abort_if_null.g" R{param.F}  	 				Y{"Input parameter F is 
 M98 P"/macros/assert/abort_if.g" R{!exists(param.A)} 				Y{"Missing required input parameter A"} 	F{var.CURRENT_FILE} E69116
 M98 P"/macros/assert/abort_if.g" R{#param.A == 0}  	 				Y{"Input parameter A is null"} 		 		F{var.CURRENT_FILE} E69117
 ; Check machine conditions
-var IS_NOT_HOMED = (!move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed || (exists(move.axes[3].homed) && !move.axes[3].homed) || (exists(move.axes[4].homed) && !move.axes[4].homed) )
+var IS_NOT_HOMED = (!move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed )
 M98 P"/macros/assert/abort_if.g" R{var.IS_NOT_HOMED}  Y{"Home required before running bed mesh"}  F{var.CURRENT_FILE} E69120
 
 ; Checking input parameters ---------------------------------------------------

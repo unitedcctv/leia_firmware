@@ -1,7 +1,6 @@
 ; Description: 	
 ;   We will home Y to Ymin.
 ; TODO:
-; 	- Move up UW if they are not up!
 ;	- doors are locked
 ;	- motors are powered
 ;------------------------------------------------------------------------------
@@ -32,14 +31,11 @@ var SPEED_SLOW_MOVE	= 300	; [mm/s]
 var Z_LIFT	= { (move.axes[2].min >= 0) ? 10 : (5 - move.axes[2].min)}		; [mm] Distance to move in Z before starting
 var Y_RETRACTION	= 5 	; [mm] Distance to move back in Y
 
-; Deselect the tool and home UW if needed -------------------------------------
+; Deselect the tool if needed -------------------------------------------------
 var CURRENT_TOOL = state.currentTool
 if(var.CURRENT_TOOL != -1)
 	T-1 ; Deselect the current extruder
 	M98  P"/macros/assert/result.g" R{result} Y"Unable to deselect the extruder" F{var.CURRENT_FILE}   E36105
-; U/W lifter homing removed
-;if( !move.axes[3].homed || ( exists(move.axes[4]) && !move.axes[4].homed ) )
-;    M98 P"/sys/homeuw.g"
 
 ; Making sure the big motors are ON before moving -----------------------------
 M17 Y Z

@@ -32,47 +32,16 @@ while true
 	; daemon task
 	; --------------------------------------------------------------------------------
 	var TOOL			= iterations
-	var TOUCH_OBSTACLE_TOLERANCE = exists(global.touchBedObstacleThresholds) ? global.touchBedObstacleThresholds[var.TOOL] : null;[mV] or [mm]
-	var TOOL_POSITIONED	= (state.currentTool == var.TOOL) && (abs(move.axes[3+var.TOOL].machinePosition - move.axes[3+var.TOOL].min) < 0.1 )
 	var HEATER_ID		= tools[var.TOOL].heaters[0]
 	var HEATER_ON		= heat.heaters[var.HEATER_ID].active > 0
 	var TEMP_MAX 		= heat.heaters[var.HEATER_ID].max
 	var TEMP_CUR_MAIN 	= heat.heaters[var.HEATER_ID].current
 	var TEMP_CUR_AUX	= exists(global.toolAuxTempIDs[var.TOOL]) ? sensors.analog[global.toolAuxTempIDs[var.TOOL]].lastReading : null
-	var TOUCH_SENS_ID			= (exists(global.TOUCH_BED_SENSOR_IDS[var.TOOL]) && (global.TOUCH_BED_SENSOR_IDS[var.TOOL] != null)) ? global.TOUCH_BED_SENSOR_IDS[var.TOOL] : null
-	var CUR_VALUE_TOUCH_SENS 	= var.TOUCH_SENS_ID != null ? sensors.analog[var.TOUCH_SENS_ID].lastReading : null
-	var CAL_VALUE_TOUCH_SENS 	= (exists(global.touchSensorPrintPosValues)&&(global.touchSensorPrintPosValues[var.TOOL] != null)) ? global.touchSensorPrintPosValues[var.TOOL]: null
-	var touchSensDiff	= 0
 	var TOOL_OFF_BUT_ACTIV_TEMP		= (heat.heaters[var.HEATER_ID].state == "off") && var.HEATER_ON
 	; setting the active and standby temp to turn off temp
 	if(var.TOOL_OFF_BUT_ACTIV_TEMP)
 		M568 P{var.TOOL} S{var.MIN_TEMP} R{var.MIN_TEMP} A0 ;Setting extruder temp to 0 first
 		M568 P{var.TOOL} S{var.TURN_OFF_TEMP} R{var.TURN_OFF_TEMP} A0 ;Setting extruder temp to off temp
-
-	; --------------------------------------------------------------------------------
-	;Tool positioning check
-	;if(var.IS_PRINTING && global.toolPositioningFailed[var.TOOL])
-	;	M98 P"/macros/report/warning.g" Y{"T%s positioning failed. Run lifter test. Pausing.."} A{var.TOOL,var.touchSensDiff} F{var.CURRENT_FILE} W12686
-	;	set global.hmiStateDetail = "error_obstacle"
-	;	M25
-	; --------------------------------------------------------------------------------
-
-	; --------------------------------------------------------------------------------
-	;Obstacle detection
-	if(var.IS_PRINTING && var.TOOL_POSITIONED && (var.TOUCH_OBSTACLE_TOLERANCE != null))
-
-		if global.touchLinearInstalled[var.TOOL]
-			; use the touch sensor as position encoder for obstacle detection if installed
-			set var.touchSensDiff = abs(move.axes[3+var.TOOL].machinePosition - sensors.analog[global.TOUCH_BED_SENSOR_IDS[var.TOOL]].lastReading)
-		elif ((var.CAL_VALUE_TOUCH_SENS != null) && (var.CUR_VALUE_TOUCH_SENS != null))
-			set var.touchSensDiff = abs(var.CUR_VALUE_TOUCH_SENS - var.CAL_VALUE_TOUCH_SENS)
-
-		if (var.touchSensDiff > var.TOUCH_OBSTACLE_TOLERANCE && !global.toolPositioningFailed[var.TOOL])
-			; we have an obstacle
-			M98 P"/macros/report/warning.g" Y{"T%s obstacle detected. Sensor diff: %s . Pausing.."} A{var.TOOL,var.touchSensDiff} F{var.CURRENT_FILE} W12687
-			set global.hmiStateDetail = "error_obstacle"
-			M25
-	; --------------------------------------------------------------------------------
 
 	; --------------------------------------------------------------------------------
 	; checking the current temperature is within the allowed maximum limit

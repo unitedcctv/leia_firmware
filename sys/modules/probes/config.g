@@ -15,7 +15,7 @@ var PROBING_SPEED     = 600         ; mm/min  (dive speed)
 var TRAVEL_SPEED      = 6000        ; mm/min  (between points)
 var PROBE_OFFSET_X    = 60			; [mm] Offset of the probe in X
 var PROBE_OFFSET_Y    = -10		; [mm] Offset of the probe in Y
-var PROBE_OFFSET_Z    = 5			; [mm] Offset of the probe in Z
+var PROBE_OFFSET_Z    = 0.5			; [mm] Offset of the probe in Z
 
 global PROBE_OFFSET_Z = var.PROBE_OFFSET_Z		; [mm] Offset of the probe in Z
 global PROBE_START_X = 50		; [mm] First point of the besh mesh in X

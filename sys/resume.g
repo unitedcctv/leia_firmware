@@ -32,10 +32,6 @@ M98 P"/macros/printing/get_ready.g"
 var TURN_OFF_TEMP = -273.1
 var MIN_TEMP = 0
 var FAST_XY_SPEED = 12000
-; Home UW if needed ---------------------------------------------------------
-;if global.toolPositioningFailed[0] || global.toolPositioningFailed[1]
-;	M98 P"homeuw.g"
-;	M400
 
 ; Homing XY if needed ---------------------------------------------------------
 var NEEDS_HOMING_XY = !move.axes[0].homed || !move.axes[1].homed
@@ -49,11 +45,6 @@ if(exists(global.activateExtruderRelay) && global.activateExtruderRelay)
 	M568 P{var.idleTool} S{var.MIN_TEMP} R{var.MIN_TEMP} A2
 	M568 P{var.idleTool} S{var.TURN_OFF_TEMP} R{var.TURN_OFF_TEMP} A2
 M116
-; no need to wipe when resuming from wipe pause
-if(!exists(global.manualWipe)|| !global.manualWipe)
-	if(global.wiperPresent)
-		M98 P"/macros/nozzle_cleaner/wipe.g" T{global.lastPrintingTool} F1
-M400
 T{global.lastPrintingTool}
 M400
 ; move to restore coordinates fast

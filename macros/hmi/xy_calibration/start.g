@@ -26,8 +26,8 @@ else
 
 M98 P"/macros/printing/get_ready.g"
 
-; Check whether the machine is homed x y z u w-------------------------------------------------------------
-if(!move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed || !move.axes[3].homed || (exists(move.axes[4]) && !move.axes[4].homed)) 
+; Check whether the machine is homed x y z ---------------------------------------------------------------
+if(!move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed) 
 	; home all the axes "/sys/homeall.g" checks which axes need to be homed -----------------------------------------------
 	M98 P"/sys/homeall.g"
 M400

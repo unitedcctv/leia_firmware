@@ -27,7 +27,7 @@ M98 P"/macros/assert/abort_if_null.g" R{param.A}  	 				Y{"Input parameter A is 
 
 
 ; Check machine conditions
-var IS_NOT_HOMED = (!move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed || (exists(move.axes[3].homed) && !move.axes[3].homed) || (exists(move.axes[4].homed) && !move.axes[4].homed) )
+var IS_NOT_HOMED = (!move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed )
 M98 P"/macros/assert/abort_if.g" R{var.IS_NOT_HOMED}  Y{"Home required before executing xy-calibration"}  F{var.CURRENT_FILE} E69070
 
 ; Definitions -----------------------------------------------------------------

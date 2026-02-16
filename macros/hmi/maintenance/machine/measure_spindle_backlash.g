@@ -8,7 +8,7 @@ M118 S{"[measure_touch_grid.g] Starting "^var.CURRENT_FILE^" I:"^state.thisInput
 ; lock the door----------------------------------------------------------------
 M98 P"/macros/doors/lock.g"
 
-var AXES_HOMED = move.axes[0].homed && move.axes[1].homed && move.axes[2].homed && move.axes[3].homed && move.axes[4].homed
+var AXES_HOMED = move.axes[0].homed && move.axes[1].homed && move.axes[2].homed
 if (!var.AXES_HOMED)
 	G28
 M400

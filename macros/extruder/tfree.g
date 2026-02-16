@@ -21,29 +21,7 @@ if param.T == null || param.T >= 2 || param.T < 0
 M400
 
 ; Definitions -----------------------------------------------------------------
-var TOOL_LIFT_AXIS = 3 + param.T ; Related Tools axis to move.
 var ACTIVE_TEMP = tools[param.T].active[0]
-
-; Free the tool -------- ------------------------------------------------------
-
-M118 S{"[tfree.g] Moving up T"^param.T}
-if param.T == 0
-	if move.axes[var.TOOL_LIFT_AXIS].homed
-		G0 U{move.axes[var.TOOL_LIFT_AXIS].max} F5000
-	else
-		; if not homed, move to max endstop
-		G91
-		G0 H1 U{move.axes[var.TOOL_LIFT_AXIS].max} F3000
-		G90
-else
-	if move.axes[var.TOOL_LIFT_AXIS].homed
-		G0 W{move.axes[var.TOOL_LIFT_AXIS].max} F5000
-	else
-		; if not homed, move to max endstop
-		G91
-		G0 H1 W{move.axes[var.TOOL_LIFT_AXIS].max} F3000
-		G90
-M400
 
 ; Set temperature back because duet switches to standby temperature after tool change
 M568 P{param.T} S{var.ACTIVE_TEMP} R{var.ACTIVE_TEMP} A2

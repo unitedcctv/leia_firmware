@@ -20,11 +20,6 @@ M400
 M98 P"/macros/extruder/relay/switch_now.g"
 M400
 
-; restoring the position for the switched tool
-if(global.lastPrintingTool == 0)
-	G0 U{move.axes[3].min} W{move.axes[4].max}
-elif(global.lastPrintingTool == 1)
-	G0 U{move.axes[3].max} W{move.axes[4].min}
 M400
 ; Checking the Call Id param for HMI
 if exists(param.I)

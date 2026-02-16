@@ -46,10 +46,6 @@ if(var.ACTIVATE_EXTRUDER_RELAY)
 	var HAS_FILAMENT = (exists(global.OOF_INPUTS_ID) && sensors.gpIn[global.OOF_INPUTS_ID[global.lastPrintingTool]].value == 1 )  ? true : false
 	if(var.HAS_FILAMENT)		
 		M24	; resuming
-		if(global.lastPrintingTool == 0)
-			G0 U{move.axes[3].min} W{move.axes[4].max}
-		elif(global.lastPrintingTool == 1)
-			G0 U{move.axes[3].max} W{move.axes[4].min}
 		M400
 	else
 		M98 P"/macros/report/warning.g"   Y{"No filament in the switched tool %s"} A{global.lastPrintingTool,}    F{var.CURRENT_FILE} W57624

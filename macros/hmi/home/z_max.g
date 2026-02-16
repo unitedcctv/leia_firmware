@@ -23,10 +23,6 @@ if(var.CURRENT_TOOL != -1)
 	M98  P"/macros/assert/result.g" R{result} Y"Unable to deselect the extruder" F{var.CURRENT_FILE}   E85102
 	M118 S{"Deselected the current tool since the machine is going to home Z axes"}
 	
-;Checking if the UW axes are homed and if not home uw first----------------------
-if( !move.axes[3].homed || ( exists(move.axes[4]) && !move.axes[4].homed ) )
-	M98 P"/sys/homeuw.g"
-
 ; Proceed with home Z axis to the max-------------------------------------------------------
 M98 P"/sys/hometozmax.g"
 

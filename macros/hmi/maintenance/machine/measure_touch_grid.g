@@ -17,7 +17,7 @@ M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/doors/unlock.g"} F{var.
 ; lock the door----------------------------------------------------------------
 M98 P"/macros/doors/lock.g"
 
-var AXES_HOMED = move.axes[0].homed && move.axes[1].homed && move.axes[2].homed && move.axes[3].homed && move.axes[4].homed
+var AXES_HOMED = move.axes[0].homed && move.axes[1].homed && move.axes[2].homed
 if (!var.AXES_HOMED)
 	G28
 M400

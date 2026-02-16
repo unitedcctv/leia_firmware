@@ -302,20 +302,7 @@ M98 P"/macros/assert/result.g" R{result} Y"Unable to create the analog input to 
 M98 P"/macros/files/link/create.g" L"/macros/axes/measure_length.g" D"/sys/modules/axes/measure_length.g"
 M98 P"/macros/files/link/create.g" L{"/sys/trigger" ^ var.EMERGENCY_TRIGGER_ID ^ ".g"} 	D"/sys/modules/axes/trigger_emergency_probe.g" I{null}
 
-; Nozzle wiper Positions for tools in X and Y {tool0, tool1}
-global WIPER_X_POSITIONS		= {0, -25}
-global WIPER_Y_POSITIONS 		= {var.Y_AXIS_MIN, var.Y_AXIS_MAX}
-global TOOL_WIPING_POS			= {5, 5}
-global wiperPresent				= false
 global jobBBOX					= null
-; Loading the Wiper existence status
-M98 P"/macros/variable/load.g" N"global.wiperPresent"  ; Will be null if not existing
-M598
-if (global.savedValue == null)
-	M118 S{"[CONFIG] No nozzle wiper found, using default values"}
-else
-	M118 S{"[CONFIG] Loaded bed touch values: " ^ global.savedValue}
-	set global.wiperPresent = global.savedValue
 
 ; Loading the job bounding box from the last started job if we had a power failure
 if (exists(global.powerFailure) && global.powerFailure)

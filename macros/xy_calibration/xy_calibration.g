@@ -77,8 +77,6 @@ if(var.inUseT0)
 		set global.exTempLastSetTimes[1] = state.upTime
 
 	M116 P0 S5; wait for T0 to reach temperature
-	if(global.wiperPresent)
-		M98 P"/macros/nozzle_cleaner/wipe.g" T0 F1
 	M400
 
 	M98 P"/macros/xy_calibration/start.g" T0 X{var.patternPositionT0} L{var.LINE_LENGTH}
@@ -87,9 +85,6 @@ if(var.inUseT0)
 	M118 S{"[XYCAL] Second run T0"}
 	set var.patternPositionT0 = {var.patternPositionT0[0], var.patternPositionT0[1] + 80}
 
-	if(global.wiperPresent)
-		M98 P"/macros/nozzle_cleaner/wipe.g" T0 F0
-	M400
 	M98 P"/macros/xy_calibration/start.g" T0 X{var.patternPositionT0} L{var.LINE_LENGTH}
 
 M400
@@ -102,8 +97,6 @@ if(var.inUseT1)
 		M568 P0 A2 R{var.TEMPERATURE_T0[1]} S{var.TEMPERATURE_T0[1]}
 
 	M116 P1 S5; wait for T1 to reach temperature
-	if(global.wiperPresent)
-		M98 P"/macros/nozzle_cleaner/wipe.g" T1 F1
 	M400
 
 	M98 P"/macros/xy_calibration/start.g" T1 X{var.patternPositionT1} L{var.LINE_LENGTH}
@@ -113,9 +106,6 @@ if(var.inUseT1)
 	M118 S{"[XYCAL] Second run T1"}
 	set var.patternPositionT1 = {var.patternPositionT1[0], var.patternPositionT1[1] + 80}
 
-	if(global.wiperPresent)
-		M98 P"/macros/nozzle_cleaner/wipe.g" T1 F0
-	M400
 	M98 P"/macros/xy_calibration/start.g" T1 X{var.patternPositionT1} L{var.LINE_LENGTH}
 
 M400

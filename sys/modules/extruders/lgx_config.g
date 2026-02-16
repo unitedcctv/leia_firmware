@@ -103,7 +103,7 @@ else
 M98 P"/macros/assert/board_present.g" D{var.BOARD_CAN_ID} Y{"Missing %s"} A{var.boardName,} F{var.CURRENT_FILE} E12708
 
 ; Temperature sensor of the heater
-M308 S{var.TEMP_SENSOR_ID} P{var.TEMP_SENSOR_PORT} Y{var.TEMP_SENSOR_TYPE} B4267 C0 R500000 A{"temp_t"^param.T^"[°C]"}  ; Slice Engineering 300°C thermistor
+M308 S{var.TEMP_SENSOR_ID} P{var.TEMP_SENSOR_PORT} Y"thermistor" T100000 B4680 C6.455513e-8 A{"temp_t"^param.T^"[°C]"}  ; Slice 300°C 100K thermistor
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create temp. sensor for the extruder" F{var.CURRENT_FILE} E12709
 
 ; Tool FAN with tachometer
