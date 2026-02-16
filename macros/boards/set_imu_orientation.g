@@ -11,7 +11,7 @@ M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/boards/record_imu_orien
 
 ; Definitions -----------------------------------------------------------------
 var fileLocation = ""
-; (!) This path is shared between others xy_calibration g-codes
+; (!) This path is shared between other g-codes
 if(boards[0].shortName = "EMU_CB-MA")
 	set var.fileLocation = "0:/macros/boards/emulation_files/reference/" ; Path where the files are saved
 else

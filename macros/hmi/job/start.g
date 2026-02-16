@@ -11,8 +11,6 @@
 ;					automatically generated.
 ;	- B (optional): Flag to activate the omit bed leveling, if it is 0 bedleveling
 ;					is omitted. so default is 1
-;	- Q (optional): Flag to omit XY calibration, if it is 0 XY calibration
-;					is omitted. so default is 1
 ;	- T (optional): Flag to activate the omit bed touch, if it is 0 bedtouch
 ;					is omitted. so default is 1
 ;   - O (optional): job bounding rectangle location and dimensions as vector6. {MINX,MINY,MINZ,MAXX,MAXY,MAXYZ}
@@ -135,14 +133,6 @@ else
 
 if(exists(param.T) && (param.T == 0))
 	set global.omitBedTouch = true
-; Omit XY calib------------------------------------------------------------------
-if(exists(global.omitXYCalibration))
-	set global.omitXYCalibration = false
-else
-	global omitXYCalibration = false
-
-if(exists(param.Q) && (param.Q == 0))
-	set global.omitXYCalibration = true
 ; Let's start the print ---------------------------------------------------------
 M32 {param.J}	;Select the job file and Start the SD print
 M400

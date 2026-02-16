@@ -4,13 +4,11 @@
 ;------------------------------------------------------------------------------
 ; Restarting if we are moving and emergency was triggered -------------------------
 ; (!) This is the important part!
-; We need to disable the restarting if we are performing the xy-calibration
 ; Definitions---------------------------------------------------------------
 var AXES_MOVING = ((move.currentMove.requestedSpeed > 0))
-var XY_CAL_RUNNING = (exists(global.xyCalibrationRunning) && global.xyCalibrationRunning)
 
 ; check the trigger condtions
-if(var.AXES_MOVING && !var.XY_CAL_RUNNING)
+if(var.AXES_MOVING)
 	; turn off all motors
 	; (!) IMPORTANT: Reset the boards. The machine is going to restart!
 	set global.hmiStateDetail = "error_obstacle"

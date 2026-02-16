@@ -17,7 +17,7 @@
 ; 	M98 P"/macros/sensors/adc/target_counts_from_range.g" T6000 B-5000 D-1500
 ; 	M98 P"/macros/assert/abort_if_null.g" R{global.adcTargetCounts} Y{"Failed getting the range"}  	F{var.CURRENT_FILE} E12345
 ;------------------------------------------------------------------------------
-var CURRENT_FILE 	= "/macros/probe/get_sample_multiple_z.g"
+var CURRENT_FILE 	= "/macros/sensors/adc/target_counts_from_range.g"
 ; M118 S{"[PROBE] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[state.thisInput].stackDepth}
 
 ; Set global return variables -------------------------------------------------

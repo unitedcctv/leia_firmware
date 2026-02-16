@@ -45,8 +45,6 @@ M98 P"/sys/modules/lights/config.g"
 M98 P"/sys/modules/probes/config.g"
 M98 P"/sys/modules/axes/config.g"
 M98 P"/sys/modules/power_meter/viio_config.g"
-M98 P"/sys/modules/xy_calibration/config.g"
-
 ; Adding the extruder if they are connected -----------------------------------
 M98 P"/sys/modules/extruders/lgx_config.g" T0
 

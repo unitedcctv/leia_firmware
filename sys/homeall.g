@@ -16,7 +16,6 @@ M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/homez.g"}							 F{var.CUR
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/emergency/is_ready_to_operate.g"}  F{var.CURRENT_FILE} E35005
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/axes/home_to_zmax.g"}			  F{var.CURRENT_FILE} E35006
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/sensors/sanity_check.g"}			  F{var.CURRENT_FILE} E35014
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/xy_calibration/xy_calibration.g"} 		F{var.CURRENT_FILE} E35015
 ; Checking modules and global variables
 M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_AXES)}  Y{"Missing module AXES"}   F{var.CURRENT_FILE} E35007
 M98 P"/macros/assert/abort_if.g" R{!exists(state.currentTool)}   Y{"In the OM, state.currentTool is missing"}   F{var.CURRENT_FILE} E35009
