@@ -25,10 +25,8 @@ else
 	M98 P"/macros/assert/abort_if_null.g" 	R{param.T} Y{"The parameter T with the tool number is null"} F{var.CURRENT_FILE} E84102
 	M98 P"/macros/assert/abort_if.g" R{((param.T) < 0)} Y{"Invalid tool number"} F{var.CURRENT_FILE} E84103
 	M98 P"/macros/assert/abort_if.g" R{(param.T) > (#tools - 1)} Y{"Invalid tool number"} F{var.CURRENT_FILE} E84104
-	if(param.T == 0)
-		M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_EXTRUDER_0)} Y{"Missing required module EXTRUDER 0"} F{var.CURRENT_FILE} E84100
-	else
-		M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_EXTRUDER_1)} Y{"Missing required module EXTRUDER 1"} F{var.CURRENT_FILE} E84101		
+	M98 P"/macros/assert/abort_if.g" R{param.T != 0} Y{"Only T0 supported - single extruder setup"} F{var.CURRENT_FILE} E84101
+	M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_EXTRUDER_0)} Y{"Missing required module EXTRUDER 0"} F{var.CURRENT_FILE} E84100
 	set var.toolNumber = param.T
 
 var MAX_TOOL_TEMP = heat.heaters[tools[var.toolNumber].heaters[0]].max ; [dC]

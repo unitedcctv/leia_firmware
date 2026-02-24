@@ -15,8 +15,8 @@ M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/emergency/is_ready_to_o
 ; Checking global variables and input parameters ------------------------------
 ;M98 P"/macros/emergency/is_ready_to_operate.g"
 ; Checking global variables
-M98 P"/macros/assert/abort_if.g" R{state.currentTool == 0 && !exists(global.MODULE_EXTRUDER_0)} Y{"Missing module EXTRUDER 0"} F{var.CURRENT_FILE} E84001
-M98 P"/macros/assert/abort_if.g" R{state.currentTool == 1 && !exists(global.MODULE_EXTRUDER_1)} Y{"Missing module EXTRUDER 1"} F{var.CURRENT_FILE} E84002
+M98 P"/macros/assert/abort_if.g" R{state.currentTool != 0} Y{"Only T0 supported - single extruder setup"} F{var.CURRENT_FILE} E84001
+M98 P"/macros/assert/abort_if.g" R{!exists(global.MODULE_EXTRUDER_0)} Y{"Missing module EXTRUDER 0"} F{var.CURRENT_FILE} E84002
 ; Check that parameters are present and not null
 M98 P"/macros/assert/abort_if.g"		R{!exists(param.E)}     	Y{"Missing extrusion length param E"}    F{var.CURRENT_FILE} E84003
 M98 P"/macros/assert/abort_if_null.g" 	R{param.E}              	Y{"Extrusion length param E is null"} F{var.CURRENT_FILE} E84004
@@ -59,7 +59,7 @@ if(param.E > 0)
 var calculatedExtrLength = param.E	; variable to store the extrusion length
 ;Proceed with the extrusion------------------------------------------------------
 ; Loading the flow rate multiplier if exists
-if(exists(global.flowRateMultipliers) && (global.flowRateMultipliers[param.T] != null))	
+if(exists(global.flowRateMultipliers) && exists(param.T) && #global.flowRateMultipliers > param.T && (global.flowRateMultipliers[param.T] != null))	
 	set var.calculatedExtrLength = (global.flowRateMultipliers[param.T] * param.E) / 100
 
 ; set relative extrusion mode

@@ -3,7 +3,7 @@
 ; Input Parameters:
 ;   - L (optional): [mm] Length of filament to extrude for calibration (default decided by extruder team = 500mm)
 ;	- F (optional): [mm/min] Extrusion speed (default decided by extruder team 100mm/min)
-;   - T : tool index, Extruder to calibrate (error if not provided)
+;   - T : tool index (only T0 supported - single extruder)
 ; Example:
 ;	M98 P"/macros/extruder/flow_rate/calibrate.g" L500 F150 T0
 ;	M98 P"/macros/extruder/flow_rate/calibrate.g" T0
@@ -22,7 +22,7 @@ M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/extruder/flow_rate/save
 
 ; Checking global variables and input parameters ------------------------------
 M98 P"/macros/assert/abort_if.g"	R{!exists(param.T)}			Y{"Missing Tool index param T"}	F{var.CURRENT_FILE} E57653
-M98 P"/macros/assert/abort_if.g"	R{!exists(tools[param.T])}	Y{"Invalid Tool %s"} A{param.T,}		F{var.CURRENT_FILE} E57654
+M98 P"/macros/assert/abort_if.g"	R{param.T != 0}				Y{"Only T0 supported - single extruder setup"} F{var.CURRENT_FILE} E57654
 
 if (exists(param.L))
 	M98 P"/macros/assert/abort_if_null.g"	R{param.L}			Y{"Extrusion length param L is null"} F{var.CURRENT_FILE} E57655
@@ -59,7 +59,7 @@ var LENGTH_FLUSH		= 25			; [mm] Length that will be flushed bofore measuring the
 var LENGTH_VERIFY		= 100			; [mm] Length that will be extruded to check
 var EXTR_TOLERANCE	 	= {90,120}		; [%] Extrusion tolerance
 var VERI_TOLERANCE 		= 2				; [%] Tolerance for the verification
-var flowRateMultipliers = {null, null}
+var flowRateMultipliers = {null}
 
 ; reset idle time
 M98 P"/macros/generic/reset_idle_timer.g"

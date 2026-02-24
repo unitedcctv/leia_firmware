@@ -26,9 +26,6 @@ if(exists(global.toolFanId))
 	if((global.toolFanId[0]!= null) && (fans[global.toolFanId[0]].actualValue > 0))
 		M106 P{global.toolFanId[0]} S0
 		M118 S{"[turn_off_everything.g] Turned off T0 fan"}
-	if((global.toolFanId[1]!= null) && (fans[global.toolFanId[1]].actualValue > 0))
-		M106 P{global.toolFanId[1]} S0
-		M118 S{"[turn_off_everything.g] Turned off T1 fan"}
 
 ; Deselect the extruder -------------------------------------------------------
 if(state.currentTool >= 0)

@@ -1,7 +1,7 @@
 ; Description: 	
 ;	Reset the accumulated value in the filament monitor sensor.
 ; Input Parameters:
-;	- T: Tool 0 or 1 where the filament monitor is connected
+;	- T: Tool index (only T0 supported - single extruder)
 ; Example:
 ;	M98 P"/macros/extruder/filament_monitor/reset_accumulated.g" T0
 ;------------------------------------------------------------------------------

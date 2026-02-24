@@ -17,8 +17,7 @@ var X_POS        			= (move.axes[0].max + move.axes[0].min)/2        									; 
 var Y_POS        			= (move.axes[1].max + move.axes[1].min)/2 - 5    									; [mm] Y-axis center position - half distance between extruders
 var Z_POS        			= 5            																		; [mm] Z-axis position
 var N_STEPS      			= 5           																		; Number of impulse responses
-var T0_CAN_ACC		 		= {20, 20.0}         																; {CAN-ID, Accelerometer port} of T0 extruder board
-var T1_CAN_ACC 				= {21, 21.0}         																; {CAN-ID, Accelerometer port} of T1 extruder board
+var T0_CAN_ACC		 		= {20, 20.0}         												; {CAN-ID, Accelerometer port} of T0 extruder board
 var T_RELAX		 			= 0.5																				; [s] Relax time after one motor's step
 var T_STEP	     			= 0.15 + var.T_RELAX																; [s] Approximate time duration of one impulse response
 var SAMP_FREQ	 			= 400																				; [Hz] Accelerometer's sampling frequency
@@ -49,15 +48,9 @@ var boardAccID = null
 var cpuFanID = null
 while iterations < #boards
 	if boards[iterations].canAddress == var.T0_CAN_ACC[0]
-		set var.numExtrudersInstalled = var.numExtrudersInstalled + 1
+		set var.numExtrudersInstalled = 1
 		set var.boardAccID = var.T0_CAN_ACC[1]
 		set var.cpuFanID = exists(global.cpuFanId) ? global.cpuFanId[0] : null
-		continue
-
-	if boards[iterations].canAddress == var.T1_CAN_ACC[0]
-		set var.numExtrudersInstalled = var.numExtrudersInstalled + 1
-		set var.boardAccID = (var.boardAccID == null) ? var.T1_CAN_ACC[1] : var.boardAccID
-		set var.cpuFanID = (exists(global.cpuFanId) && var.cpuFanID == null) ? global.cpuFanId[1] : var.cpuFanID
 		continue
 
 if var.boardAccID == null

@@ -19,7 +19,6 @@ M118 S{"[CONFIG] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[
 ; Checking for files first
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_set_offset.g"} F{var.CURRENT_FILE} E12700
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_duet_filament_monitor.g"} F{var.CURRENT_FILE} E12701
-M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_motor_load_sensor.g"} F{var.CURRENT_FILE} E12702
 ; Checking global variables
 M98 P"/macros/assert/abort_if.g" R{exists(global.MODULE_EXTRUDER_0)}  Y{"A previous EXTRUDER_0 configuration exists"} F{var.CURRENT_FILE} E12706
 
@@ -127,9 +126,6 @@ M98 P"/sys/modules/extruders/basic_set_offset.g" X{var.OFFSET_X_DEFAULT} Y{var.O
 
 ; Filament monitor
 M98 P"/sys/modules/extruders/basic_duet_filament_monitor.g"
-
-; Motor load
-M98 P"/sys/modules/extruders/basic_motor_load_sensor.g"
 
 ; Configuring the global variable for T0
 global MODULE_EXTRUDER_0 = 0.1	; Setting the current version of this module

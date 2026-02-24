@@ -1,6 +1,5 @@
 ; Description:
 ; To test the flowrate in extruder 0 with 300mm in 3mm/s
-;	- T: Tool 0 or 1 to configure
 ;------------------------------------------------------------------------------
 var CURRENT_FILE = "/macros/fat/flowrate/test_t0.g"
 M118 S{"[TOOL] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[state.thisInput].stackDepth}

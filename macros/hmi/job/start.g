@@ -19,10 +19,9 @@
 ;	- A (optional): Flag to activate the autoplacement of the print object.(will be far right of the print bed)
 ;					if it is 1 the autoplacement is active. Default is 0
 ;	- S (optional): Parameter to shift the part in the print bed. It is an array {Xoffset, Yoffset}
-;	- X (optional): Compatible tool number for the current job(extruder number). In our set up 
-;					the values will be 0 or 1
+;	- X (optional): Compatible tool number for the current job(extruder number). Only T0 supported.
 ; Example:
-;	M98 P"/macros/hmi/job/start.g" J"/gcodes/_hmi/e3f42d41591e4bcbab7ea20ac0eda02e.gcode" S{108.807,91.5,0.4,141.192,117.874,25.3} A1 B1 T1 C0
+;	M98 P"/macros/hmi/job/start.g" J"/gcodes/_hmi/e3f42d41591e4bcbab7ea20ac0eda02e.gcode" S{108.807,91.5,0.4,141.192,117.874,25.3} A1 B1 T0
 ; -----------------------------------------------------------------------------
 ; Mandatory check before starting the file to sync all the input channels
 if !inputs[state.thisInput].active
