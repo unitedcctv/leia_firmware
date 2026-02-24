@@ -23,10 +23,7 @@ if( var.ENABLE_T0 )
 		M591 D{tools[0].extruders[0]} S1
 	
 if( var.ENABLE_T1 )
-	M98 P"/macros/boards/get_index_in_om.g" A82
-	if(global.boardIndexInOM != null) 
-		M118 S{"[SENSOR] The filament monitor sensor was enabled for T1"}
-		M591 D{tools[1].extruders[0]} S1
+	; T1 removed - single extruder setup
 
 ; -----------------------------------------------------------------------------
 M118 S{"[SENSOR] Done "^var.CURRENT_FILE}

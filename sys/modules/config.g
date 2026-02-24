@@ -45,8 +45,8 @@ M98 P"/sys/modules/lights/config.g"
 M98 P"/sys/modules/probes/config.g"
 M98 P"/sys/modules/axes/config.g"
 M98 P"/sys/modules/power_meter/viio_config.g"
-; Adding the extruder if they are connected -----------------------------------
-M98 P"/sys/modules/extruders/lgx_config.g" T0
+; Adding the extruder (T0 only) ------------------------------------------------
+M98 P"/sys/modules/extruders/lgx_config.g"
 
 ; Enable Daemon
 set global.daemonStop = false	

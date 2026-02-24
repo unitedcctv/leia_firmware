@@ -41,8 +41,7 @@ M98 P"/macros/assert/abort_if.g" R{var.INVALID_DRIVER}  		Y{"Only drivers 0.5, 0
 
 
 ; Default values of the return parameter
-var EXTRUDERS_CONFIGURED = {(!exists(global.extruderDriverId) ? 0 : (global.extruderDriverId+1) ) }; Amount of extruders currently available
-M98 P"/macros/assert/abort_if.g" R{(var.EXTRUDERS_CONFIGURED > 1)} Y{"No more extruders can be configured"} F{var.CURRENT_FILE} E57046
+M98 P"/macros/assert/abort_if.g" R{exists(global.extruderDriverId)} Y{"Extruder already configured"} F{var.CURRENT_FILE} E57046
 if(!exists(global.extruderDriverId))
 	global extruderDriverId = null
 else
@@ -54,10 +53,10 @@ while (iterations < #move.extruders)
 	if(move.extruders[iterations] != null && move.extruders[iterations].driver != null)
 		M98 P"/macros/assert/abort_if.g" R{(move.extruders[iterations].driver == var.DRIVER_NAME)} Y{"Driver already used"} F{var.CURRENT_FILE} E57047
 
-if( param.D == 20.0 || param.D == 21.0)
-	M569 P{param.D} D3 H50 V50 ; We need stealthChop to enable the sensor
+if( param.D == 20.0)
+	M569 P{param.D} S1 D3 H50 V50 ; We need stealthChop to enable the sensor
 
-if( var.EXTRUDERS_CONFIGURED == 0 )
+; Configure T0 extruder
 	; Mapping
 	M584 E{param.D}		; Mapping the extruder 0 to param.D
 	M98 P"/macros/assert/result.g" R{result} Y"Unable to map the motor driver to T0" F{var.CURRENT_FILE} E57048
@@ -77,46 +76,9 @@ if( var.EXTRUDERS_CONFIGURED == 0 )
 	M201 E{param.A} 	; [mm/s^2] Set acceleration in T0
 	M98  P"/macros/assert/result.g" R{result} Y"Unable to set the accelerations in T0" F{var.CURRENT_FILE} E57053
 	; Current and idle factor
-	M906 E{param.C}	I{move.idle.factor*100} ; [mA][%] Set motor currents and motor idle factor in per cent in X
+	M906 E{param.C}	I{move.idle.factor*100} ; [mA][%] Set motor currents and motor idle factor in per cent
 	M98  P"/macros/assert/result.g" R{result} Y"Unable to set the current on idle factor in T0 driver" F{var.CURRENT_FILE} E57054
 	set global.extruderDriverId = 0	; return
-else
-	var otherDriver = 0.0
-	if( move.extruders[0].driver == "5" && param.D == 0.6 )
-		set var.otherDriver = 0.5		; Emulator
-		M584 E0.5:0.6					; Mapping the extruder 1 to param.D
-		M98 P"/macros/assert/result.g" R{result} Y"Unable to map the motor driver to T1" F{var.CURRENT_FILE} E57055
-	elif( move.extruders[0].driver == "6" && param.D == 0.5 )
-		M584 E0.6:0.5					; Mapping the extruder 1 to param.D
-		M98 P"/macros/assert/result.g" R{result} Y"Unable to map the motor driver to T1" F{var.CURRENT_FILE} E57056
-	elif( move.extruders[0].driver == "20.0" && param.D == 21.0 )
-		M584 E20.0:21.0					; Mapping the extruder 1 to param.D
-		M98 P"/macros/assert/result.g" R{result} Y"Unable to map the motor driver to T1" F{var.CURRENT_FILE} E57057
-	elif( move.extruders[0].driver == "21.0" && param.D == 20.0 )
-		M584 E21.0:20.0					; Mapping the extruder 1 to param.D
-		M98 P"/macros/assert/result.g" R{result} Y"Unable to map the motor driver to T1" F{var.CURRENT_FILE} E57058
-	else
-		M98 P"/macros/assert/abort.g" Y{"Unknown first exturder driver or not supported"}  F{var.CURRENT_FILE} E57059
-	; Mapping
-	; Microstepping
-	M350 E{move.extruders[0].microstepping.value}:{param.I} 		; Configure microstepping without interpolation in T1
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to set the microstepping in T1" F{var.CURRENT_FILE} E57060
-	; Steps per mm
-	M92  E{move.extruders[0].stepsPerMm}:{param.T} 		; [step/mm] Set steps per mm in T1
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to set the steps per mm in T1" F{var.CURRENT_FILE} E57061
-	; Maximum instantaneous speed changes
-	M566 E{move.extruders[0].jerk}:{param.J}	; [mm/min] Set maximum instantaneous speed changes in T1
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to set the jerk in T1" F{var.CURRENT_FILE} E57062
-	; Maximum speeds
-	M203 E{move.extruders[0].speed}:{param.S} 	; [mm/min] Set maximum speeds in T1
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to set the max. speeds in T1" F{var.CURRENT_FILE} E57063
-	; Accelerations
-	M201 E{move.extruders[0].acceleration}:{param.A} 	; [mm/s^2] Set acceleration in T1
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to set the accelerations in T1" F{var.CURRENT_FILE} E57064
-	; Current and idle factor
-	M906 E{move.extruders[0].current}:{param.C}	I{move.idle.factor*100} ; [mA][%] Set motor currents and motor idle factor in per cent in X
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to set the current on idle factor in T1 driver" F{var.CURRENT_FILE} E57065
-	set global.extruderDriverId = 1 ; return
 
 ; -----------------------------------------------------------------------------
 M118 S{"[TOOL] Done "^var.CURRENT_FILE}

@@ -10,7 +10,7 @@
 ;		+ 1 x Out of filament digital sensor
 ;		+ 1 x Magnetic filament monitor
 ; Input Parameters:
-;	- T: Tool 0 or 1 to configure
+;	None - hardcoded for T0 (single extruder setup)
 ;---------------------------------------------------------------------------------------------
 var CURRENT_FILE = "/sys/modules/extruders/lgx_config.g"
 M118 S{"[CONFIG] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[state.thisInput].stackDepth}
@@ -21,32 +21,23 @@ M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_se
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_duet_filament_monitor.g"} F{var.CURRENT_FILE} E12701
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/modules/extruders/basic_motor_load_sensor.g"} F{var.CURRENT_FILE} E12702
 ; Checking global variables
-M98 P"/macros/assert/abort_if.g" R{!exists(param.T)}  Y{"Missing required input parameter T"} F{var.CURRENT_FILE} E12703
-M98 P"/macros/assert/abort_if_null.g" R{param.T}  	  Y{"Input parameter T is null"} F{var.CURRENT_FILE} E12704
-M98 P"/macros/assert/abort_if.g" R{(param.T>=2||param.T<0)}  Y{"Unexpected tool value"} F{var.CURRENT_FILE} E12705
-M98 P"/macros/assert/abort_if.g" R{(param.T == 0) && exists(global.MODULE_EXTRUDER_0)}  Y{"A previous EXTRUDER_0 configuration exists"} F{var.CURRENT_FILE} E12706
-M98 P"/macros/assert/abort_if.g" R{(param.T == 1) && exists(global.MODULE_EXTRUDER_1)}  Y{"A previous EXTRUDER_1 configuration exists"} F{var.CURRENT_FILE} E12707
+M98 P"/macros/assert/abort_if.g" R{exists(global.MODULE_EXTRUDER_0)}  Y{"A previous EXTRUDER_0 configuration exists"} F{var.CURRENT_FILE} E12706
 
 ; DEFINITIONS --------------------------------------------------------------------------------
-; we need to check for existence of globals because this file will be called for each tool
+var TOOL = 0
 
 if (!exists(global.exTempLastSetTimes))
-	; hardcoded for maximum 2 extruders
-	global exTempLastSetTimes = {0,0}
+	global exTempLastSetTimes = {0}
 else
-	set global.exTempLastSetTimes[param.T] = 0
+	set global.exTempLastSetTimes[0] = 0
 
 if (!exists(global.tooldleWaitTime))
 	global tooldleWaitTime = 20 * 60 ;[sec] 20 minutes
 
 ; CAN-FD ID related to the board.
-var BOARD_CAN_ID		= {20 + param.T} 			; As a number
-var BOARD_CAN_ID_NAME	= {""^var.BOARD_CAN_ID} ; As a string
-var boardName = ""
-if(var.BOARD_CAN_ID == 20)
-	set var.boardName = "T0 board"
-else
-	set var.boardName = "T1 board"
+var BOARD_CAN_ID		= 20						; T0 board CAN address
+var BOARD_CAN_ID_NAME	= "20"					; As a string
+var boardName = "T0 board"
 ; Tool Name
 var TOOL_NAME			= "LGX-Extruder"
 
@@ -64,11 +55,11 @@ var HEATER_MAX_TEMP		= 320				; [ºC] Max. temperature allowed in
 											; the extruder
 
 ; Offsets
-var OFFSET_X_DEFAULT = { 10, 10}			; [mm] Default offset in X for T0 and T1
-var OFFSET_Y_DEFAULT = {-55, 55}			; [mm] Default offset in Y for T0 and T1
+var OFFSET_X_DEFAULT = 10					; [mm] Default offset in X for T0
+var OFFSET_Y_DEFAULT = -55					; [mm] Default offset in Y for T0
 
 ; Feeder motor
-var FEEDER_MOTOR		= {20.0 + param.T}	; Feeder motor
+var FEEDER_MOTOR		= 20.0					; Feeder motor (T0)
 var FEEDER_STEPS_MM		= 27.109			; [1/mm] Steps per mm without microstepping
 var FEEDER_MICROSTEPS	= 64				; [] Steps per mm without microstepping
 var FEEDER_SPEED		= 3000				; [mm/min] Max speed
@@ -77,33 +68,30 @@ var FEEDER_ACCELERATION	= 500				; [mm/s^2] Max acceleration
 var FEEDER_CURRENT		= 650				; [mA] Current of the motor
 
 ; Tool FAN with tachometer
-var FAN_TOOL_PORT 		= {var.BOARD_CAN_ID_NAME^".out1"}	; Tool FAN
-; var FAN_TOOL_TACH_PORT	= {"+"^var.BOARD_CAN_ID_NAME^".out1.tach"}	; Tool FAN tachometer
+var FAN_TOOL_PORT 		= "20.out1"				; Tool FAN
+; var FAN_TOOL_TACH_PORT	= "+20.out1.tach"			; Tool FAN tachometer
 M98 P"/macros/get_id/fan.g"
 var FAN_TOOL_ID 		= global.fanId		; ID to use for the tool Fan
-var FAN_TOOL_NAME		= {"tool_t"^param.T}
+var FAN_TOOL_NAME		= "tool_t0"
 
 ; Cold-end FAN controlled by temperature
-var FAN_COLDEND_PORT 	= {var.BOARD_CAN_ID_NAME^".out2"}	; Cold-end FAN
+var FAN_COLDEND_PORT 	= "20.out2"				; Cold-end FAN
 M98 P"/macros/get_id/fan.g"
 var FAN_COLDEND_ID 		= global.fanId		; ID to use for the cold-end fan
 var FAN_COLDEND_TEMP_TRIGGER = 45			; [ºC] Temperature of the hot-end 
 											; used to turn on the fan. If it is
 											; lower, the fan is OFF.
-var FAN_COLDEND_NAME	= {"coldend_t"^param.T}
+var FAN_COLDEND_NAME	= "coldend_t0"
 
 ; Nozzle size
-if(param.T == 0)
-	global NOZZLE_E0	= 0.6						; [mm]
-else 
-	global NOZZLE_E1	= 0.6						; [mm]
+global NOZZLE_E0	= 0.6						; [mm]
 
 ; CONFIGURATION ------------------------------------------------------------------------------
 ; Check boards
 M98 P"/macros/assert/board_present.g" D{var.BOARD_CAN_ID} Y{"Missing %s"} A{var.boardName,} F{var.CURRENT_FILE} E12708
 
 ; Temperature sensor of the heater
-M308 S{var.TEMP_SENSOR_ID} P{var.TEMP_SENSOR_PORT} Y"thermistor" T100000 B4680 C6.455513e-8 A{"temp_t"^param.T^"[°C]"}  ; Slice 300°C 100K thermistor
+M308 S{var.TEMP_SENSOR_ID} P{var.TEMP_SENSOR_PORT} Y"thermistor" T100000 B4680 C6.455513e-8 A"temp_t0[°C]"  ; Slice 300°C 100K thermistor
 M98 P"/macros/assert/result.g" R{result} Y"Unable to create temp. sensor for the extruder" F{var.CURRENT_FILE} E12709
 
 ; Tool FAN with tachometer
@@ -130,29 +118,24 @@ M98 P"/macros/extruder/config_motor.g" D{var.FEEDER_MOTOR} I{var.FEEDER_MICROSTE
 M98 P"/macros/assert/abort_if_null.g" R{global.extruderDriverId} Y"Unable to configure the driver" F{var.CURRENT_FILE} E12716
 
 ; Tool ----------------------------------------------------------
-var NAME_TO_SHOW = {var.TOOL_NAME^" T"^param.T}
-M563 P{param.T} D{global.extruderDriverId} H{var.HEATER_ID} F{var.FAN_TOOL_ID} S{var.NAME_TO_SHOW}
-M98 P"/macros/assert/result.g" R{result} Y{"Unable to define the tool "^param.T} F{var.CURRENT_FILE} E12717
+var NAME_TO_SHOW = {var.TOOL_NAME^" T0"}
+M563 P0 D{global.extruderDriverId} H{var.HEATER_ID} F{var.FAN_TOOL_ID} S{var.NAME_TO_SHOW}
+M98 P"/macros/assert/result.g" R{result} Y{"Unable to define tool 0"} F{var.CURRENT_FILE} E12717
 
 ; Tool position
-M98 P"/sys/modules/extruders/basic_set_offset.g" T{param.T} X{var.OFFSET_X_DEFAULT[param.T]}  Y{var.OFFSET_Y_DEFAULT[param.T]}
+M98 P"/sys/modules/extruders/basic_set_offset.g" X{var.OFFSET_X_DEFAULT} Y{var.OFFSET_Y_DEFAULT}
 
 ; Filament monitor
-M98 P"/sys/modules/extruders/basic_duet_filament_monitor.g" T{param.T}
+M98 P"/sys/modules/extruders/basic_duet_filament_monitor.g"
 
 ; Motor load
-M98 P"/sys/modules/extruders/basic_motor_load_sensor.g" T{param.T}
+M98 P"/sys/modules/extruders/basic_motor_load_sensor.g"
 
-; Configuring teh global variable relate to the tools
-if( param.T == 0 )
-	global MODULE_EXTRUDER_0 = 0.1	; Setting the current version of this module	
-	M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic_daemon.g"
-else
-	global MODULE_EXTRUDER_1 = 0.1	; Setting the current version of this module	
-	if(!fileexists("/sys/modules/extruders/basic_daemon.g"))
-		M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic_daemon.g"
+; Configuring the global variable for T0
+global MODULE_EXTRUDER_0 = 0.1	; Setting the current version of this module
+M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic_daemon.g"
 
-M118 S{"Configured tool "^param.T}
+M118 S{"Configured tool 0"}
 
 ; -----------------------------------------------------------------------------
 M118 S{"[CONFIG] Configured "^var.CURRENT_FILE}
