@@ -40,12 +40,12 @@ var TRIGGERING_POINT = global.adcTargetCounts ; ADC endstop point
 if(!exists(global.OOF_INPUTS_ID))
 	M98 P"/macros/get_id/input.g"
 	var INPUT_ID_T0 = global.inputId
-	global OOF_INPUTS_ID = { var.INPUT_ID_T0 }
+	global OOF_INPUTS_ID = { var.INPUT_ID_T0, -1 }
 
 if(!exists(global.OOF_INPUTS_ID_RETMOD))
 	M98 P"/macros/get_id/input.g"
 	var INPUT_ID_RETMOD_T0 = global.inputId
-	global OOF_INPUTS_ID_RETMOD = { var.INPUT_ID_RETMOD_T0 }
+	global OOF_INPUTS_ID_RETMOD = { var.INPUT_ID_RETMOD_T0, -1 }
 
 ; Get the trigger ID
 if(!exists(global.OOF_INPUTS_TRIGGER))
@@ -53,7 +53,7 @@ if(!exists(global.OOF_INPUTS_TRIGGER))
 	var TRIGGER_ID_OFF_0 = global.triggerId
 	M98 P"/macros/get_id/trigger.g"
 	var TRIGGER_ID_ON_0 = global.triggerId 
-	global OOF_INPUTS_TRIGGER = { { var.TRIGGER_ID_OFF_0, var.TRIGGER_ID_ON_0} }
+	global OOF_INPUTS_TRIGGER = { { var.TRIGGER_ID_OFF_0, var.TRIGGER_ID_ON_0}, {-1, -1} }
 
 ; retraction modules are not used yet, but we prepare the trigger IDs
 if(!exists(global.OOF_INPUTS_RETMOD_TRIGGER))
@@ -61,7 +61,7 @@ if(!exists(global.OOF_INPUTS_RETMOD_TRIGGER))
 	var TRIGGER_ID_RETMOD_OFF_0 = global.triggerId
 	M98 P"/macros/get_id/trigger.g"
 	var TRIGGER_ID_RETMOD_ON_0 = global.triggerId 
-	global OOF_INPUTS_RETMOD_TRIGGER = { { var.TRIGGER_ID_RETMOD_OFF_0, var.TRIGGER_ID_RETMOD_ON_0} }
+	global OOF_INPUTS_RETMOD_TRIGGER = { { var.TRIGGER_ID_RETMOD_OFF_0, var.TRIGGER_ID_RETMOD_ON_0}, {-1, -1} }
 
 ; Create the sensor -----------------------------------------------------------
 M98 P"/macros/get_id/sensor.g"

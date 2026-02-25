@@ -24,7 +24,7 @@ elif(var.canAddress == "70")
 elif(var.canAddress == "20")
 	set var.canAddress = "T0"
 elif(var.canAddress == "21")
-	set var.canAddress = "T1"
+	set var.canAddress = "Unknown"
 ; report the error------------------------------------------------------------
 M98 P"/macros/report/event.g" Y{"CAN reconnected in %s board. Please check the CAN connection and restart the machine"} A{var.canAddress,}  F{var.CURRENT_FILE} V31400
 if state.status == "processing"

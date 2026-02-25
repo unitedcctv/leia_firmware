@@ -59,7 +59,7 @@ var LENGTH_FLUSH		= 25			; [mm] Length that will be flushed bofore measuring the
 var LENGTH_VERIFY		= 100			; [mm] Length that will be extruded to check
 var EXTR_TOLERANCE	 	= {90,120}		; [%] Extrusion tolerance
 var VERI_TOLERANCE 		= 2				; [%] Tolerance for the verification
-var flowRateMultipliers = {null}
+var flowRateMultipliers = {null, null}
 
 ; reset idle time
 M98 P"/macros/generic/reset_idle_timer.g"

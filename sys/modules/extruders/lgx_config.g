@@ -26,7 +26,7 @@ M98 P"/macros/assert/abort_if.g" R{exists(global.MODULE_EXTRUDER_0)}  Y{"A previ
 var TOOL = 0
 
 if (!exists(global.exTempLastSetTimes))
-	global exTempLastSetTimes = {0}
+	global exTempLastSetTimes = {0, 0}
 else
 	set global.exTempLastSetTimes[0] = 0
 
@@ -130,6 +130,10 @@ M98 P"/sys/modules/extruders/basic_duet_filament_monitor.g"
 ; Configuring the global variable for T0
 global MODULE_EXTRUDER_0 = 0.1	; Setting the current version of this module
 M98 P"/macros/files/daemon/add.g" F"/sys/modules/extruders/basic_daemon.g"
+
+; Ensure T0 is selected by default in a single extruder setup
+if(state.currentTool != 0)
+	T0 P0
 
 M118 S{"Configured tool 0"}
 

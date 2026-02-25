@@ -15,7 +15,7 @@ var MIN_TEMP = 0 		; [dC] Min value before turning the tool off
 var OFF_TEMP = -273.1 	; [dC] Value to use when the tool is off
 var FILA_ERROR_TIME_WINDOW = 30 ; [s] how many seconds as a window for triggering filament error if crossed threshold
 var FILA_ERROR_EVENT_THRESHOLD = 10 ; [n] how many error events within the window to trigger the error
-var ACTIVE_TOOL = (param.B) == 81.0 ? 0 : 1 ; identifying the tool number using CAN address
+
 if !exists(global.filaErrorEvents)
 	; initialize with length threshold -1 because if the array is full and we have another event, we need to pause
 	global filaErrorEvents = vector(var.FILA_ERROR_EVENT_THRESHOLD-1,0)
@@ -73,9 +73,10 @@ if (param.P > 0)
 	M118 S{"[filament-error.g] Pausing print"}
 	M25 ; pause the print
 	M400
-	M568 P{var.ACTIVE_TOOL} S{var.MIN_TEMP} R{var.MIN_TEMP} A0 ;Setting extruder temp to 0 first [SAFETY]
-	M568 P{var.ACTIVE_TOOL} S{var.OFF_TEMP} R{var.OFF_TEMP} A0 ;Setting extruder temp to off temp [SAFETY]
-	M118 S{"[filament-error.g] Turned off the extruder"}
+	if(exists(tools[0]))
+		M568 P0 S{var.MIN_TEMP} R{var.MIN_TEMP} A0 ;Setting extruder temp to 0 first [SAFETY]
+		M568 P0 S{var.OFF_TEMP} R{var.OFF_TEMP} A0 ;Setting extruder temp to off temp [SAFETY]
+	M118 S{"[filament-error.g] Filament error in T0, please check the filament."}
 M400
 
 M118 S{"[filament-error.g] Done " ^var.CURRENT_FILE}

@@ -33,9 +33,7 @@ var XY_RETRACTION_SMALL = 3		; [mm] Distance to move back in XY
 
 var RESUMING_PRINT = {(state.status == "paused" || state.status == "resuming") && job.file.fileName != null}
 
-; Deselect the tool and home UW if needed -------------------------------------
-var CURRENT_TOOL = state.currentTool
-
+; Tool selection maintained for single extruder
 ; Making sure the big motors are ON before moving -----------------------------
 M17 X Y Z
 G4 S0.5
@@ -44,7 +42,7 @@ M400
 ; Process ---------------------------------------------------------------------
 ; Let's make sure we are far from the bed or the print, moving up. But only if we are not resuming from pause
 if (!var.RESUMING_PRINT)
-	T-1
+	; Tool selection maintained for single extruder
 	M400
 
 	if( !sensors.endstops[2].triggered )
@@ -117,8 +115,9 @@ M98 P"/macros/assert/abort_if.g" R{!sensors.endstops[1].triggered} Y{"Unable to 
 M400
 
 
-; Reselect the tool -----------------------------------------------------------
-T{var.CURRENT_TOOL}
+; Reselect the tool -----------------------------------------------------------	; Reselect tool in case of resume
+	if(state.currentTool == -1)
+		T0
 M400
 M98 P"/macros/report/event.g" Y"Home XY completed" F{var.CURRENT_FILE} V35200
 

@@ -10,26 +10,12 @@ M118 S{"[z.g] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[sta
 ; Checking for files first
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/printing/get_ready.g"} F{var.CURRENT_FILE} E85300
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/sys/homez.g"} F{var.CURRENT_FILE} E85301
-; Definitions -------------------------------------------------------------------
-var CURRENT_TOOL = state.currentTool
-
 ; Checking if we can home the machine -------------------------------------------
 M98 P"/macros/printing/get_ready.g"
-
-; Deslect the tool before start home the Z axes----------------------------------
-if(var.CURRENT_TOOL != -1)
-	T-1 ; Deselect the current extruder    
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to deselect the extruder" F{var.CURRENT_FILE}   E85304
-	M118 S{"Deselected the current tool since the machine is going to home Z axes"}
-
-; Proceed with homing the Z axis -------------------------------------------
+	
+; Proceed with home Z axis-------------------------------------------------------
 M98 P"/sys/homez.g"
 M400
-; Reslect the tool ----------------------------------
-if(var.CURRENT_TOOL >= 0)
-	T{var.CURRENT_TOOL}
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to reselect the extruder" F{var.CURRENT_FILE}   E85305
-	M118 S{"Re-selected the current tool which was T"^var.CURRENT_TOOL}
 
 ; Checking the Call Id param for HMI
 if exists(param.I)

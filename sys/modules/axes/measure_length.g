@@ -56,8 +56,7 @@ if( global.popUpResult == null || (global.popUpResult != null && global.popUpRes
 	M98 P"/macros/assert/abort_if_null.g" R{global.popUpResult}  	Y{"There was no input from the user before homing"}  F{var.CURRENT_FILE}  E10205
 	M98 P"/macros/assert/abort.g" Y{"The user aborted the process before homing"}  F{var.CURRENT_FILE}  E10206
 
-if(state.currentTool != -1)
-	T-1 ; Deselecting tools
+; Tool selection maintained for single extruder
 
 M118 S{"[AXES] Recording the axes length"}
 G28	; Homing

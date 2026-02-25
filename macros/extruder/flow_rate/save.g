@@ -17,7 +17,7 @@ M98 P"/macros/assert/abort_if.g" R{!exists(param.K)} Y{"Missing flow rate multip
 M98 P"/macros/assert/abort_if.g" R{param.K < 1 || param.K > 200} Y{"Invalid flow rate multiplier: "} A{param.K,} F{var.CURRENT_FILE} E56746
 
 if !exists(global.flowRateMultipliers)
-	global flowRateMultipliers = {100}
+	global flowRateMultipliers = {100, 100}
 
 set global.flowRateMultipliers[param.T] = param.K
 M98 P"/macros/variable/save_number.g" N"global.flowRateMultipliers" V{global.flowRateMultipliers}

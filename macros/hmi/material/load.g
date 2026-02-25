@@ -14,13 +14,13 @@ M118 S{"[load.g] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[
 M98 P"/macros/assert/abort_if_file_missing.g" R{"/macros/material/load.g"} F{var.CURRENT_FILE} E87020
 if (exists(param.T))
 	M98 P"/macros/assert/abort_if.g" R{(!exists(tools[param.T]))} Y{"Tool param T=%s outside range of available tools %s"} A{param.T,#tools}    F{var.CURRENT_FILE} E87021
-	if(param.T != state.currentTool)
-		T{param.T} P0
-else
-	M98 P"/macros/assert/abort_if.g" R{state.currentTool == -1} Y{"No tool selected and no param T provided"}    F{var.CURRENT_FILE} E87022
+	M98 P"/macros/assert/abort_if.g" R{param.T != 0} Y{"Only T0 supported"} F{var.CURRENT_FILE} E87022
+	
+if(state.currentTool != 0)
+	T0 P0
 
 ; Check that the extruder is not too cold
-M98 P"/macros/assert/abort_if.g" R{tools[state.currentTool].active[0] < heat.coldExtrudeTemperature} Y{"No tool selected and no param T provided"}    F{var.CURRENT_FILE} E87023
+M98 P"/macros/assert/abort_if.g" R{tools[0].active[0] < heat.coldExtrudeTemperature} Y{"Extruder too cold"}    F{var.CURRENT_FILE} E87023
 ; calling the load macro
 M98 P"/macros/material/load.g" T{param.T}
 M400

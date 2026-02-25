@@ -29,11 +29,7 @@ var errorMoving = false					; Used to record the result of a move.
 
 M400	; Making sure the machine is not moving 
 
-; Deselect the extruder -------------------------------------------------------
-var CURRENT_TOOL = state.currentTool
-if(var.CURRENT_TOOL != -1)
-	T-1 ; Deselect the current extruder
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to deselect the extruder" F{var.CURRENT_FILE}   E36504
+; Tool selection maintained for single extruder
 
 ; Making sure the big motors are ON before moving -----------------------------
 M17 X Y Z

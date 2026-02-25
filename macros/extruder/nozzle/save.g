@@ -18,7 +18,7 @@ M98 P"/macros/assert/abort_if.g" R{!exists(param.N)} Y{"Missing Nozzle size para
 M98 P"/macros/assert/abort_if.g" R{param.N == null || param.N < 0} Y{"Invalid Nozzle size param.N %s"} A{param.N,} F{var.CURRENT_FILE} E56756
 
 if !exists(global.nozzleSizes)
-	global nozzleSizes = {0.6}
+	global nozzleSizes = {0.6, 0.6}
 
 set global.nozzleSizes[param.T] = param.N
 M98 P"/macros/variable/save_number.g" N"global.nozzleSizes" V{global.nozzleSizes}

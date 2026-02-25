@@ -17,10 +17,9 @@ var toolNumber = 0
 ; Checking global variables
 M98 P"/macros/assert/abort_if.g" R{(!exists(global.exTempLastSetTimes))} Y{"Missing global.exTempLastSetTimes"} F{var.CURRENT_FILE} E84113		
 if(!exists(param.T))
-	if(state.currentTool != -1)
-		set var.toolNumber = state.currentTool
-	else
-		M98 P"/macros/assert/abort_if.g" R{state.currentTool == -1} Y{"No tool selected and no param T provided"}    F{var.CURRENT_FILE} E84111
+	if(state.currentTool != 0)
+		T0 P0
+	set var.toolNumber = 0
 else
 	M98 P"/macros/assert/abort_if_null.g" 	R{param.T} Y{"The parameter T with the tool number is null"} F{var.CURRENT_FILE} E84102
 	M98 P"/macros/assert/abort_if.g" R{((param.T) < 0)} Y{"Invalid tool number"} F{var.CURRENT_FILE} E84103

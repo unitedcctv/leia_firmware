@@ -26,11 +26,10 @@ M98 P"/macros/assert/abort_if.g" 	R{param.F == 0}					Y{"Feedrate is 0"} F{var.C
 
 ; select tool
 if (exists(param.T))
-	M98 P"/macros/assert/abort_if.g" R{(!exists(tools[param.T]))} Y{"Tool param T=%s outside range of available tools %s"} A{param.T,#tools}    F{var.CURRENT_FILE} E84008
-	if(param.T != state.currentTool)
-		T{param.T}
-else
-	M98 P"/macros/assert/abort_if.g" R{state.currentTool == -1} Y{"No tool selected and no param T provided"}    F{var.CURRENT_FILE} E84009
+	M98 P"/macros/assert/abort_if.g" R{param.T != 0} Y{"Only T0 supported - single extruder setup"} F{var.CURRENT_FILE} E84008
+	
+if(state.currentTool != 0)
+	T0 P0
 
 M400
 
@@ -41,7 +40,7 @@ var MIN_F  			= -50			; [mm/s]
 var MAX_F  			= 30			; [mm/s]
 var FEEDRATE_MM_MIN = {param.F * 60} ; [mm/min] Conversion to mm/min from mm/sec
 ; Check set temperature
-var TOOL_TEMP = tools[state.currentTool].active[0]
+var TOOL_TEMP = tools[0].active[0]
 var MIN_EX_TEMP = heat.coldExtrudeTemperature
 var MIN_RETR_TEMP = heat.coldRetractTemperature
 

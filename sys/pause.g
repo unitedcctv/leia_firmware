@@ -22,11 +22,10 @@ var Z_LIFT_AMOUNT = 5
 
 ; saving the t0 and t1 temps
 var TEMP_T0 = exists(tools[0]) ? heat.heaters[tools[0].heaters[0]].active : null
-var TEMP_T1 = exists(tools[1]) ? heat.heaters[tools[1].heaters[0]].active : null
 if (!exists(global.lastPrintingTemps))
-	global lastPrintingTemps = {var.TEMP_T0, var.TEMP_T1}
+	global lastPrintingTemps = {var.TEMP_T0, null}
 else
-	set global.lastPrintingTemps = {var.TEMP_T0, var.TEMP_T1}
+	set global.lastPrintingTemps = {var.TEMP_T0, null}
 
 if (!exists(global.lastPrintingTool)) ; needs to be checked in case we are pausing after a power recovery resume
 	global lastPrintingTool = state.currentTool

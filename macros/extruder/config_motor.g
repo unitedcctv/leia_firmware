@@ -54,7 +54,7 @@ while (iterations < #move.extruders)
 		M98 P"/macros/assert/abort_if.g" R{(move.extruders[iterations].driver == var.DRIVER_NAME)} Y{"Driver already used"} F{var.CURRENT_FILE} E57047
 
 if( param.D == 20.0)
-	M569 P{param.D} S1 D3 H50 V50 ; We need stealthChop to enable the sensor
+	M569 P{param.D} S0 D3 H50 V50 ; We need stealthChop to enable the sensor
 
 ; Configure T0 extruder
 	; Mapping

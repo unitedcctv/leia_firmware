@@ -28,7 +28,7 @@ elif(var.canAddress == "70")
 elif(var.canAddress == "20")
 	set var.canAddress = "T0"
 elif(var.canAddress == "21")
-	set var.canAddress = "T1"
+	set var.canAddress = "Unknown"
 ; Param.P look up table-------------------------------------------------------
 if(exists(param.P))
 	var driverStatusWord = param.P	; We need to translate the status word to decode the error/warning state

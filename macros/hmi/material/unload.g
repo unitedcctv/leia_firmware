@@ -13,13 +13,13 @@ M118 S{"[HMI] Starting "^var.CURRENT_FILE^" I:"^state.thisInput^" S:"^inputs[sta
 ; select tool
 if (exists(param.T))
 	M98 P"/macros/assert/abort_if.g" R{(!exists(tools[param.T]))} Y{"Tool param T=%s outside range of available tools %s"} A{param.T,#tools}    F{var.CURRENT_FILE} E87100
-	if(param.T != state.currentTool)
-		T{param.T} P0
-else
-	M98 P"/macros/assert/abort_if.g" R{state.currentTool == -1} Y{"No tool selected and no param T provided"}    F{var.CURRENT_FILE} E87101
+	M98 P"/macros/assert/abort_if.g" R{param.T != 0} Y{"Only T0 supported"} F{var.CURRENT_FILE} E87101
+	
+if(state.currentTool != 0)
+	T0 P0
 
 ; Check that the extruder is not too cold
-M98 P"/macros/assert/abort_if.g" R{tools[state.currentTool].active[0] < heat.coldRetractTemperature} Y{"No tool selected and no param T provided"}    F{var.CURRENT_FILE} E87102
+M98 P"/macros/assert/abort_if.g" R{tools[0].active[0] < heat.coldRetractTemperature} Y{"Extruder too cold"}    F{var.CURRENT_FILE} E87102
 
 ; Unload Procedure -------------------------------------------------------------
 ; set relative extrusion mode

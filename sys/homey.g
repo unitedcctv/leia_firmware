@@ -31,11 +31,7 @@ var SPEED_SLOW_MOVE	= 300	; [mm/s]
 var Z_LIFT	= { (move.axes[2].min >= 0) ? 10 : (5 - move.axes[2].min)}		; [mm] Distance to move in Z before starting
 var Y_RETRACTION	= 5 	; [mm] Distance to move back in Y
 
-; Deselect the tool if needed -------------------------------------------------
-var CURRENT_TOOL = state.currentTool
-if(var.CURRENT_TOOL != -1)
-	T-1 ; Deselect the current extruder
-	M98  P"/macros/assert/result.g" R{result} Y"Unable to deselect the extruder" F{var.CURRENT_FILE}   E36105
+; Tool selection maintained for single extruder
 
 ; Making sure the big motors are ON before moving -----------------------------
 M17 Y Z
@@ -85,12 +81,6 @@ M98 P"/macros/assert/abort_if.g" R{var.errorMoving}  Y{"Unable to move Y into th
 M98 P"/macros/assert/abort_if.g" R{!sensors.endstops[1].triggered} Y{"Unable to trigger the Y endstop after retraction"} F{var.CURRENT_FILE} E36114
 M400
 
-; Reselect the tool -----------------------------------------------------------
-if(var.CURRENT_TOOL != -1)
-	T{var.CURRENT_TOOL}
-
-M98 P"/macros/report/event.g" Y"Home Y completed" F{var.CURRENT_FILE} V36100
-
 ; -----------------------------------------------------------------------------
 M118 S{"[HOMING] Done "^var.CURRENT_FILE}
-M99 ; proper exit 
+M99 ; proper exit

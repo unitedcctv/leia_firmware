@@ -15,7 +15,7 @@ M98 P"/macros/assert/abort_if.g" R{(!exists(global.cbcLastSetTime))} Y{"Missing 
 set global.bedTempLastSetTime = state.upTime
 set global.cbcLastSetTime = state.upTime
 if(exists(global.MODULE_EXTRUDER_0))
-    set global.exTempLastSetTimes[0] = {state.upTime}
+    set global.exTempLastSetTimes[0] = state.upTime
 M118 S{"Reset all the idle wait timers"}
 ; -----------------------------------------------------------------------------
 M118 S{"[GENERIC] Done "^var.CURRENT_FILE}
