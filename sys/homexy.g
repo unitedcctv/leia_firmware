@@ -40,22 +40,16 @@ G4 S0.5
 M400
 
 ; Process ---------------------------------------------------------------------
-; Let's make sure we are far from the bed or the print, moving up. But only if we are not resuming from pause
-if (!var.RESUMING_PRINT)
-	; Tool selection maintained for single extruder
+; Let's make sure we are far from the bed or the print, moving up!
+var errorMoving = false
+if( !sensors.endstops[2].triggered )
+	G91												; Relative position
+	G1 H1 Z{var.Z_LIFT} F{var.SPEED_FAST_MOVE}		; Move Z up
+	set var.errorMoving = (result > 0)
 	M400
-
-	if( !sensors.endstops[2].triggered )
-		G91												; Relative position
-				; Move Z up – only seek end-stop if Z is not homed yet
-		if (!move.axes[2].homed)
-			G1 H1 Z{var.Z_LIFT} F{var.SPEED_FAST_MOVE} ; seek Z-max for clearance on first XY homing
-		else
-			G1 Z{var.Z_LIFT} F{var.SPEED_FAST_MOVE}   ; already homed → just lift a bit, no end-stop seek
-		M400
-	else
-		M98 P"/macros/report/warning.g" Y{"The Z endstop is triggered before moving"} F{var.CURRENT_FILE} W35200
-M400
+else
+	M98 P"/macros/report/warning.g" Y{"The Z endstop is triggered before moving"} F{var.CURRENT_FILE} W26000
+M98 P"/macros/assert/abort_if.g" R{var.errorMoving}  Y{"Unable to lift Z"} F{var.CURRENT_FILE} E36006
 
 ; Check if we are in the endstop for X or Y 
 var X_TRIGGERED_AT_START = sensors.endstops[0].triggered
