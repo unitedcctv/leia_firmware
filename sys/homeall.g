@@ -51,7 +51,7 @@ M400
 M98 P"/macros/printing/abort_if_forced.g" Y{"Before homing to Zmax"} F{var.CURRENT_FILE} L{inputs[state.thisInput].lineNumber}
 M98 P"/sys/homez.g"
 M400
-M18 Z ; Turn off Z motor to lose the position
+; M18 Z ; Turn off Z motor to lose the position (DISABLED - was causing second Z home)
 ; Update/set the last time homing to Zmax
 if(!exists(global.homedToZmax))
 	global homedToZmax = state.time

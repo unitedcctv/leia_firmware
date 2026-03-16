@@ -27,7 +27,7 @@ var MOVE_LENGTH_Y	= {move.axes[1].max - move.axes[1].min + var.Y_TOLERANCE}
 
 var SPEED_FAST_MOVE	= 4000	; [mm/s]
 var SPEED_SLOW_MOVE	= 500	; [mm/s]
-var Z_LIFT	= { (move.axes[2].min >= 0) ? 10 : (5 - move.axes[2].min)}		; [mm] Distance to move in Z before starting
+var Z_LIFT	= 10		    ; [mm] Distance to move in Z before starting
 var XY_RETRACTION_LARGE	= 30 	; [mm] Distance to move back in XY
 var XY_RETRACTION_SMALL = 3		; [mm] Distance to move back in XY
 
